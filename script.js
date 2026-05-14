@@ -229,7 +229,7 @@ if (contactForm) {
       const encodedMessage = encodeURIComponent(waMessage);
       
       // The Redirection
-      const waUrl = `https://wa.me/918608113558?text=${encodedMessage}`;
+      const waUrl = `https://wa.me/918838344590?text=${encodedMessage}`;
       window.open(waUrl, '_blank');
 
       contactForm.reset();
