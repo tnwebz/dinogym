@@ -977,35 +977,67 @@ iframe {
 
 @media (max-width: 767px) {
   .founders-carousel-header {
-    margin-bottom: 36px;
+    margin-bottom: 28px;
+  }
+
+  .founders-carousel-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 
   .founders-image-stage {
-    height: 18rem;
-    max-width: 420px;
+    width: min(100%, 17.5rem);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-height: 26rem;
     margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .founders-carousel-img {
+    object-fit: cover;
+    object-position: center 15%;
+    border-radius: 1.25rem;
+  }
+
+  .founders-carousel-img.is-active {
+    transform: translateX(0) translateY(0) scale(1) rotateY(0deg) !important;
   }
 
   .founders-carousel-img.is-left,
-  .founders-carousel-img.is-right {
-    opacity: 0.55;
-    transform: translateX(calc(var(--founders-gap, 40px) * var(--founders-side, 1))) translateY(calc(-1 * var(--founders-stick-up, 32px))) scale(0.82) rotateY(calc(-12deg * var(--founders-side, 1)));
+  .founders-carousel-img.is-right,
+  .founders-carousel-img.is-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+    transform: translateX(0) translateY(12px) scale(0.96) !important;
   }
 
   .founders-carousel-content {
     text-align: center;
     align-items: center;
+    padding: 0 0.5rem;
+    gap: 0.25rem;
+  }
+
+  .founders-name {
+    margin-top: 0.25rem;
+  }
+
+  .founders-quote {
+    max-width: 22rem;
+    margin: 0 auto;
   }
 
   .founders-arrow-buttons {
     justify-content: center;
-    padding-top: 1.5rem;
+    padding-top: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .founders-image-stage {
-    height: 15rem;
+    width: min(88vw, 16rem);
+    max-height: 22rem;
   }
 
   .founders-role {
@@ -1015,7 +1047,8 @@ iframe {
 
 @media (max-width: 375px) {
   .founders-image-stage {
-    height: 13rem;
+    width: min(92vw, 15rem);
+    max-height: 20rem;
   }
 }
 
@@ -1298,6 +1331,155 @@ iframe {
   border-color: #ffffff;
 }
 
+/* ===== GALLERY GATEWAY (between facilities & classes) ===== */
+.gallery-gateway {
+  padding: 28px 60px 36px;
+  background: #0a0a0a;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-gateway-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1.35rem 1.5rem;
+  background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.gallery-gateway-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.gallery-gateway-icon {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.gallery-gateway-body {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.gallery-gateway-tag {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.35rem;
+}
+
+.gallery-gateway-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.25rem, 3.5vw, 1.65rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+.gallery-gateway-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.gallery-gateway-arrow {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.gallery-gateway-card:hover .gallery-gateway-arrow {
+  transform: translateX(6px);
+  color: #ffffff;
+}
+
+/* ===== HOME INSTAGRAM SECTION ===== */
+.home-instagram {
+  background: #0a0a0a;
+  color: #d0d0d0;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.home-instagram-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-instagram-tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.home-instagram-title {
+  color: #ffffff;
+}
+
+.home-instagram-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-instagram-follow {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.home-instagram-follow:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.home-instagram-embed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 12px;
+  min-height: 200px;
+}
+
+.home-instagram-embed .elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f {
+  width: 100%;
+}
+
 /* ===== CLASSES ===== */
 .classes-section {
   background: #e9f3f6;
@@ -1568,9 +1750,30 @@ iframe {
   background: #ffffff;
   overflow: hidden;
   --text-primary: #000000;
-  --text-secondary: #333333;
-  --text-muted: #666666;
+  --text-secondary: rgba(0, 0, 0, 0.75);
+  --text-muted: rgba(0, 0, 0, 0.5);
   color: #000000;
+}
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.reviews-tag {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.25);
+  color: #000000;
+}
+
+.reviews .section-title {
+  color: #000000;
+}
+
+.reviews-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .rate-us-btn {
@@ -1578,8 +1781,8 @@ iframe {
   align-items: center;
   gap: 8px;
   padding: 14px 36px;
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 1rem;
@@ -1587,14 +1790,14 @@ iframe {
   border-radius: var(--radius-xl);
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
   margin-bottom: 16px;
 }
 
 .rate-us-btn:hover {
-  background: #222222;
+  background: #e8e8e8;
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
 }
 
 /* Reviews stacked carousel */
@@ -1608,8 +1811,8 @@ iframe {
 
 .reviews-carousel-stage {
   position: relative;
-  width: min(100%, 26rem);
-  height: clamp(16rem, 52vw, 22rem);
+  width: min(100%, 22rem);
+  height: clamp(18rem, 58vw, 24rem);
   margin: 0 auto;
 }
 
@@ -1619,8 +1822,8 @@ iframe {
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  background: #ffffff;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: #0d0d0d;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -1694,31 +1897,32 @@ iframe {
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.92);
-  color: #9ca3af;
+  color: rgba(0, 0, 0, 0.7);
   font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .review-card-arrow:hover {
   color: #000;
-  background: #fff;
+  background: #e8e8e8;
   transform: scale(1.06);
 }
 
 .review-card-image {
   width: 100%;
   height: 100%;
-  padding: 2.25rem 1rem 1rem;
+  padding: 2.75rem 0.35rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fafafa;
+  background: #000000;
 }
 
 .review-card-image img {
@@ -1726,7 +1930,7 @@ iframe {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  border-radius: 0.5rem;
+  border-radius: 0.35rem;
   pointer-events: none;
 }
 
@@ -1743,18 +1947,18 @@ iframe {
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .review-carousel-dot.active {
-  background: #000;
+  background: #000000;
   transform: scale(1.25);
 }
 
 .review-carousel-dot:hover {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {
@@ -2453,12 +2657,16 @@ iframe {
     padding: 0 4px;
   }
 
-  .founders-image-stage {
-    height: 17rem;
-  }
-
   .founders-quote {
     font-size: 0.95rem;
+  }
+
+  .gallery-gateway {
+    padding: 0 20px;
+  }
+
+  .home-instagram {
+    padding: 50px 20px;
   }
 
   .reviews-carousel {
@@ -2468,11 +2676,11 @@ iframe {
   .reviews-carousel-stage {
     width: min(100%, 100%);
     max-width: 20rem;
-    height: clamp(14rem, 65vw, 18rem);
+    height: clamp(16rem, 68vw, 20rem);
   }
 
   .review-card-image {
-    padding: 2rem 0.5rem 0.5rem;
+    padding: 2.5rem 0.25rem 0.35rem;
   }
 
   .reviews .section-subtitle {
@@ -2706,22 +2914,39 @@ iframe {
     letter-spacing: 1px;
   }
 
-  .founders-image-stage {
-    height: 14rem;
+  .founders-arrow-btn {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .gallery-gateway {
+    padding: 0 16px;
+  }
+
+  .gallery-gateway-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.85rem;
+  }
+
+  .gallery-gateway-body {
+    text-align: center;
+  }
+
+  .gallery-gateway-arrow {
+    display: none;
+  }
+
+  .home-instagram {
+    padding: 40px 16px;
   }
 
   .founders-name {
     font-size: 1.25rem;
   }
 
-  .founders-arrow-btn {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
-
   .reviews-carousel-stage {
-    max-width: 100%;
-    height: clamp(13rem, 72vw, 16rem);
+    height: clamp(15rem, 75vw, 18rem);
   }
 
   .review-carousel-dots {

@@ -91,7 +91,7 @@
     <a href="#infrastructure" onclick="closeMobile()">Facilities</a>
     <a href="gallery.html" onclick="closeMobile()">Gallery</a>
     <a href="#reviews" onclick="closeMobile()">Reviews</a>
-    <a href="instagram.html" onclick="closeMobile()">Instagram</a>
+    <a href="#instagram" onclick="closeMobile()">Instagram</a>
     <a href="#contact" onclick="closeMobile()">Contact</a>
   </div>
 
@@ -107,7 +107,7 @@
       <li><a href="#infrastructure">Facilities</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="#reviews">Reviews</a></li>
-      <li><a href="instagram.html">Instagram</a></li>
+      <li><a href="#instagram">Instagram</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
@@ -227,6 +227,25 @@
     </div>
   </section>
 
+  <!-- ===== GALLERY GATEWAY ===== -->
+  <section class="gallery-gateway" id="gallery-gateway" aria-label="Gallery">
+    <a href="gallery.html" class="gallery-gateway-card reveal">
+      <div class="gallery-gateway-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+      </div>
+      <div class="gallery-gateway-body">
+        <span class="gallery-gateway-tag">Photo &amp; Video Gallery</span>
+        <h2 class="gallery-gateway-title">View Our Gallery</h2>
+        <p class="gallery-gateway-desc">Training moments, transformations, and gym life — explore the full collection.</p>
+      </div>
+      <span class="gallery-gateway-arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
+
   <!-- ===== CLASSES ===== -->
   <section class="classes-section" id="classes">
     <h2 class="classes-title">CLASSES</h2>
@@ -267,15 +286,31 @@
     scheduleBackdrop.addEventListener('click', () => scheduleModal.classList.remove('active'));
   </script>
 
+  <!-- ===== INSTAGRAM FEED (on homepage) ===== -->
+  <section class="home-instagram section" id="instagram">
+    <div class="home-instagram-header reveal">
+      <div class="section-tag home-instagram-tag">📷 Instagram</div>
+      <h2 class="section-title home-instagram-title">Follow Our Daily Grind</h2>
+      <p class="section-subtitle home-instagram-subtitle">
+        Stay connected with DR DINO — workouts, wins, and behind-the-scenes from our community.
+      </p>
+      <a href="https://www.instagram.com/shanmugammanishanmugam/" target="_blank" rel="noopener noreferrer" class="home-instagram-follow">Follow Us ↗</a>
+    </div>
+    <div class="home-instagram-embed reveal">
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f" data-elfsight-app-lazy></div>
+    </div>
+  </section>
+
   <!-- ===== REVIEWS ===== -->
   <section class="section reviews" id="reviews">
-    <div class="reveal" style="text-align:center; margin-bottom:48px;">
-      <div class="section-tag">💬 Google Reviews</div>
+    <div class="reveal reviews-header">
+      <div class="section-tag reviews-tag">💬 Google Reviews</div>
       <h2 class="seo-hidden">Join the DR DINO Family in Chengalpattu</h2>
       <div class="section-title" aria-hidden="true">Join The Family</div>
       <a href="https://www.google.com/search?q=chengelpattu+dr+dino+gym&oq=chengelpattu+dr+dino+gym&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCggCEAAYgAQYogQyCggDEAAYgAQYogQyCggEEAAYgAQYogTSAQg3NjA0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8#lrd=0x3a52fd6b894c5171:0xde3f69f3b4abe837,3,,,,"
-        target="_blank" class="rate-us-btn">⭐ Rate Us on Google</a>
-      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">
+        target="_blank" rel="noopener noreferrer" class="rate-us-btn">⭐ Rate Us on Google</a>
+      <p class="section-subtitle reviews-subtitle">
         Real stories from real members. DR DINO FITNESS & GYM isn't just a gym — it's a family that transforms lives
         every single day.
       </p>
