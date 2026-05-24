@@ -400,7 +400,11 @@
     /* --- Responsive --- */
     @media (max-width: 768px) {
       .insta-hero {
-        padding: 0 0 40px;
+        padding: 100px 16px 40px;
+      }
+
+      .insta-hero-inner {
+        max-width: 100%;
       }
 
       .insta-feed-container {
@@ -423,6 +427,22 @@
       .insta-icon-wrap svg {
         width: 28px;
         height: 28px;
+      }
+
+      .instagram-page-header .section-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .insta-hero {
+        padding: 90px 12px 32px;
+      }
+
+      .insta-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
       }
     }
   </style>

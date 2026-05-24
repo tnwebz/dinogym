@@ -125,7 +125,7 @@
         Premium Fitness Destination
       </div>
       <h1 class="seo-hidden">DR DINO FITNESS &amp; GYM: The Ultimate Fitness Destination in Chengalpattu</h1>
-      <p class="hero-tagline" style="font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3.5vw,2.8rem); font-weight:700; color:#fff; margin-bottom:8px;">No Pain<br><span class="highlight">No Gain</span><br>Build Your Reign.</p>
+      <p class="hero-tagline">No Pain<br><span class="highlight">No Gain</span><br>Build Your Reign.</p>
       <p>Where champions are sculpted and legends are born. Experience world-class training in a premium environment
         designed for peak performance.</p>
       <div class="hero-buttons">
@@ -140,55 +140,61 @@
     </div>
   </section>
 
-  <!-- ===== ABOUT GYM FOUNDER 1 ===== -->
-  <section class="section about founders-section" id="about">
-    <div class="about-grid">
-      <div class="about-image-wrapper reveal">
-        <div class="about-image founder-slideshow" id="founder1Slideshow">
-          <img src="images/img_1.png" alt="Founder of DR DINO Gym Chengalpattu coaching a member in the premium training facility" class="founder-img active">
-          <img src="images/img_2.png" alt="Head Coach at DR DINO FITNESS Gym Chengalpattu demonstrating advanced bodybuilding techniques" class="founder-img">
+  <!-- ===== FOUNDERS CAROUSEL ===== -->
+  <section class="section about founders-carousel-section" id="about">
+    <div class="founders-carousel-header reveal">
+      <div class="section-tag">★ The Founders</div>
+      <h2 class="seo-hidden">Premium Fitness Facilities in Chengalpattu</h2>
+      <h2 class="seo-hidden">Transform Your Body at the Best Gym near Periya Natham</h2>
+      <div class="section-title" aria-hidden="true">Meet The Visionaries</div>
+      <p class="section-subtitle founders-carousel-subtitle">
+        The minds behind DR DINO — united by a passion for excellence and a commitment to transforming lives through fitness.
+      </p>
+    </div>
+
+    <div class="founders-carousel reveal" id="foundersCarousel">
+      <div class="founders-carousel-grid">
+        <div class="founders-image-stage" id="foundersImageStage">
+          <img
+            src="images/img_2.png"
+            alt="Mr Rubesh, Founder and Head Coach at DR DINO FITNESS Gym Chengalpattu"
+            class="founders-carousel-img"
+            data-index="0"
+          >
+          <img
+            src="images/p1.png"
+            alt="Strategic Lead and Co-founder at DR DINO unisex gym Chengalpattu"
+            class="founders-carousel-img"
+            data-index="1"
+          >
         </div>
-      </div>
 
-      <div class="about-content reveal">
-        <div class="section-tag">★ Visionary Leader</div>
-        <h2 class="seo-hidden">Premium Fitness Facilities in Chengalpattu</h2>
-        <div class="section-title" aria-hidden="true">The Visionary</div>
-        <div class="about-role">Founder & Head Coach</div>
-        <p class="about-text">
-          A dedicated fitness professional with a vision to revolutionize the training experience. With over a decade of
-          mastery in bodybuilding and nutrition, he has laid the foundation for DR DINO's elite standards.
-        </p>
+        <div class="founders-carousel-content">
+          <div class="founders-text-panel" id="foundersTextPanel" aria-live="polite">
+            <h3 class="founders-name" id="foundersName">Mr Rubesh</h3>
+            <p class="founders-role" id="foundersRole">Founder &amp; Head Coach</p>
+            <p class="founders-quote" id="foundersQuote">
+              A dedicated fitness professional with a vision to revolutionize the training experience. With over a decade of
+              mastery in bodybuilding and nutrition, he has laid the foundation for DR DINO's elite standards.
+            </p>
+          </div>
 
-
+          <div class="founders-arrow-buttons">
+            <button class="founders-arrow-btn" id="foundersPrev" type="button" aria-label="Previous founder">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="founders-arrow-btn" id="foundersNext" type="button" aria-label="Next founder">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-  <hr>
-  <!-- ===== ABOUT GYM FOUNDER 2 (Flipped) ===== -->
-  <section class="section about founders-section">
-    <div class="about-grid flipped">
-      <div class="about-content reveal">
-        <div class="section-tag">★ The Specialist</div>
-        <h2 class="seo-hidden">Transform Your Body at the Best Gym near Periya Natham</h2>
-        <div class="section-title" aria-hidden="true">The Strategist</div>
-        <div class="about-role">Founder & Strategic Lead</div>
-        <p class="about-text">
-          Driving the strategic growth and excellence of DR DINO. His commitment to providing a world-class environment
-          ensures that every athlete has the tools needed to surpass their own limits.
-        </p>
-
-      </div>
-
-      <div class="about-image-wrapper reveal">
-        <div class="about-image founder-slideshow" id="founder2Slideshow">
-          <img src="images/p1.png" alt="Strategic Lead at DR DINO FITNESS Gym Periya Natham Chengalpattu" class="founder-img active">
-          <img src="images/p2.png" alt="Co-founder of DR DINO unisex gym near Kanchipuram High Road Chengalpattu" class="founder-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== INFRASTRUCTURE ===== -->
   <section class="infra-showcase" id="infrastructure">
     <!-- Sliding Background Images -->
@@ -249,67 +255,7 @@
       <img src="images/sh.png" alt="DR DINO FITNESS Gym Chengalpattu class schedule and training timetable">
     </div>
   </div>
-  <style>
-    .schedule-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
 
-    .schedule-modal.active {
-      display: flex;
-    }
-
-    .schedule-modal-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-    }
-
-    .schedule-modal-content {
-      position: relative;
-      max-width: 500px;
-      width: 90%;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .schedule-modal-content img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .schedule-modal-close {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .schedule-modal-close:hover {
-      background: #000;
-    }
-  </style>
   <script>
     const scheduleBtn = document.getElementById('scheduleBtn');
     const scheduleModal = document.getElementById('scheduleModal');
@@ -334,76 +280,46 @@
         every single day.
       </p>
     </div>
-    <div class="reviews-slideshow" id="reviewsSlideshow">
-      <div class="reviews-track" id="reviewsTrack">
-        <div class="review-image-card"><img src="images/r1.png" alt="5-star Google review for DR DINO FITNESS Gym Chengalpattu from a satisfied member"></div>
-        <div class="review-image-card"><img src="images/r2.png" alt="Member testimonial praising DR DINO as the best gym near Periya Natham"></div>
-        <div class="review-image-card"><img src="images/r3.png" alt="Positive review for DR DINO unisex gym Chengalpattu training programs"></div>
-        <div class="review-image-card"><img src="images/r4.png" alt="Google review highlighting premium equipment at DR DINO FITNESS Chengalpattu"></div>
-        <div class="review-image-card"><img src="images/r5.png" alt="Member transformation success story at DR DINO Gym Chengalpattu"></div>
-        <div class="review-image-card"><img src="images/r6.png" alt="Five-star rated DR DINO FITNESS gym review from Chengalpattu member"></div>
+    <div class="reviews-carousel reveal" id="reviewsCarousel">
+      <div class="reviews-carousel-stage" id="reviewsCarouselStage">
+        <div class="review-card-arrows">
+          <button type="button" class="review-card-arrow review-card-arrow--prev" id="reviewCarouselPrev" aria-label="Previous review">&larr;</button>
+          <button type="button" class="review-card-arrow review-card-arrow--next" id="reviewCarouselNext" aria-label="Next review">&rarr;</button>
+        </div>
+        <article class="review-card" data-index="0">
+          <div class="review-card-image">
+            <img src="images/r1.png" alt="5-star Google review for DR DINO FITNESS Gym Chengalpattu from a satisfied member">
+          </div>
+        </article>
+        <article class="review-card" data-index="1">
+          <div class="review-card-image">
+            <img src="images/r2.png" alt="Member testimonial praising DR DINO as the best gym near Periya Natham">
+          </div>
+        </article>
+        <article class="review-card" data-index="2">
+          <div class="review-card-image">
+            <img src="images/r3.png" alt="Positive review for DR DINO unisex gym Chengalpattu training programs">
+          </div>
+        </article>
+        <article class="review-card" data-index="3">
+          <div class="review-card-image">
+            <img src="images/r4.png" alt="Google review highlighting premium equipment at DR DINO FITNESS Chengalpattu">
+          </div>
+        </article>
+        <article class="review-card" data-index="4">
+          <div class="review-card-image">
+            <img src="images/r5.png" alt="Member transformation success story at DR DINO Gym Chengalpattu">
+          </div>
+        </article>
+        <article class="review-card" data-index="5">
+          <div class="review-card-image">
+            <img src="images/r6.png" alt="Five-star rated DR DINO FITNESS gym review from Chengalpattu member">
+          </div>
+        </article>
       </div>
-      <button class="review-nav prev" id="reviewPrev" aria-label="Previous review">‹</button>
-      <button class="review-nav next" id="reviewNext" aria-label="Next review">›</button>
+      <div class="review-carousel-dots" id="reviewCarouselDots" role="tablist" aria-label="Review slides"></div>
     </div>
-    <div class="review-indicators" id="reviewIndicators"></div>
   </section>
-
-  <script>
-    // Reviews Slideshow
-    (function () {
-      const track = document.getElementById('reviewsTrack');
-      const cards = track.querySelectorAll('.review-image-card');
-      const prevBtn = document.getElementById('reviewPrev');
-      const nextBtn = document.getElementById('reviewNext');
-      const indicatorsWrap = document.getElementById('reviewIndicators');
-      const total = cards.length;
-      let current = 0;
-      let autoTimer;
-
-      // Build dots
-      cards.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.classList.add('review-dot');
-        if (i === 0) dot.classList.add('active');
-        dot.setAttribute('aria-label', `Go to review ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
-        indicatorsWrap.appendChild(dot);
-      });
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        
-        // Update dots
-        document.querySelectorAll('.review-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === current);
-        });
-        resetAuto();
-      }
-
-      function next() { goTo(current + 1); }
-      function prev() { goTo(current - 1); }
-
-      prevBtn.addEventListener('click', prev);
-      nextBtn.addEventListener('click', next);
-
-      // Auto-slide every 4 seconds
-      function resetAuto() {
-        clearInterval(autoTimer);
-        autoTimer = setInterval(next, 4000);
-      }
-      resetAuto();
-
-      // Pause on hover
-      const slideshow = document.getElementById('reviewsSlideshow');
-      slideshow.addEventListener('mouseenter', () => clearInterval(autoTimer));
-      slideshow.addEventListener('mouseleave', resetAuto);
-
-      // Handle window resize
-      window.addEventListener('resize', () => goTo(current));
-    })();
-  </script>
 
   <!-- ===== CONTACT ===== -->
   <section class="section contact" id="contact">

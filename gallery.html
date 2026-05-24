@@ -322,6 +322,33 @@
         padding: 120px 16px 30px;
       }
 
+      .insta-hero-inner {
+        max-width: 100%;
+      }
+
+      .insta-hero-inner h1 {
+        flex-wrap: wrap;
+        gap: 12px !important;
+        font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+      }
+
+      .gallery-tabs {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .gallery-tab {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        flex: 1 1 auto;
+        min-width: 130px;
+      }
+
+      .gallery-masonry {
+        padding: 12px;
+        gap: 16px;
+      }
+
       .insta-feed-container {
         padding: 16px;
         border-radius: 16px;
@@ -342,6 +369,23 @@
       .insta-icon-wrap svg {
         width: 28px;
         height: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .insta-hero {
+        padding: 100px 12px 24px;
+      }
+
+      .gallery-tab {
+        padding: 10px 18px;
+        font-size: 0.82rem;
+        min-width: 0;
+      }
+
+      .secret-shield {
+        width: 32px;
+        height: 32px;
       }
     }
 

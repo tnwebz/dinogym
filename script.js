@@ -288,28 +288,361 @@ document.querySelectorAll('.infra-card, .achiever-card').forEach(card => {
   });
 });
 
-// ===== FOUNDER IMAGE SLIDESHOW =====
-function initFounderSlideshow(containerId, intervalMs) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const images = container.querySelectorAll('.founder-img');
-  if (images.length < 2) return;
+// ===== FOUNDERS CAROUSEL =====
+function initFoundersCarousel() {
+  const carousel = document.getElementById('foundersCarousel');
+  const imageStage = document.getElementById('foundersImageStage');
+  const textPanel = document.getElementById('foundersTextPanel');
+  const nameEl = document.getElementById('foundersName');
+  const roleEl = document.getElementById('foundersRole');
+  const quoteEl = document.getElementById('foundersQuote');
+  const prevBtn = document.getElementById('foundersPrev');
+  const nextBtn = document.getElementById('foundersNext');
 
-  let currentIndex = 0;
+  if (!carousel || !imageStage) return;
 
-  setInterval(() => {
-    // Remove active from current
-    images[currentIndex].classList.remove('active');
-    // Move to next
-    currentIndex = (currentIndex + 1) % images.length;
-    // Add active to next
-    images[currentIndex].classList.add('active');
-  }, intervalMs);
+  const founders = [
+    {
+      name: 'Mr Rubesh',
+      role: 'Founder & Head Coach',
+      quote: "A dedicated fitness professional with a vision to revolutionize the training experience. With over a decade of mastery in bodybuilding and nutrition, he has laid the foundation for DR DINO's elite standards.",
+    },
+    {
+      name: 'The Strategist',
+      role: 'Founder & Strategic Lead',
+      quote: 'Driving the strategic growth and excellence of DR DINO. His commitment to providing a world-class environment ensures that every athlete has the tools needed to surpass their own limits.',
+    },
+  ];
+
+  const images = Array.from(imageStage.querySelectorAll('.founders-carousel-img'));
+  const total = founders.length;
+  let activeIndex = 0;
+  let autoplayTimer = null;
+
+  function calculateGap(width) {
+    const minWidth = 320;
+    const maxWidth = 1456;
+    const minGap = width <= 480 ? 36 : 60;
+    const maxGap = 86;
+    if (width <= minWidth) return minGap;
+    if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
+    return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
+  }
+
+  function updateLayoutVars() {
+    const width = imageStage.offsetWidth;
+    const gap = calculateGap(width);
+    imageStage.style.setProperty('--founders-gap', `${gap}px`);
+    imageStage.style.setProperty('--founders-stick-up', `${gap * 0.8}px`);
+  }
+
+  function updateImages() {
+    images.forEach((img, index) => {
+      img.classList.remove('is-active', 'is-left', 'is-right', 'is-hidden');
+      const isActive = index === activeIndex;
+      const isLeft = index === (activeIndex - 1 + total) % total;
+      const isRight = index === (activeIndex + 1) % total;
+
+      if (isActive) img.classList.add('is-active');
+      else if (isLeft) {
+        img.classList.add('is-left');
+        img.style.setProperty('--founders-side', '-1');
+      } else if (isRight) {
+        img.classList.add('is-right');
+        img.style.setProperty('--founders-side', '1');
+      } else img.classList.add('is-hidden');
+    });
+  }
+
+  function renderQuote(text) {
+    quoteEl.innerHTML = '';
+    text.split(' ').forEach((word, i) => {
+      const span = document.createElement('span');
+      span.className = 'quote-word';
+      span.style.animationDelay = `${0.025 * i}s`;
+      span.textContent = `${word} `;
+      quoteEl.appendChild(span);
+    });
+  }
+
+  function updateText() {
+    const founder = founders[activeIndex];
+    textPanel.classList.add('is-changing');
+
+    window.setTimeout(() => {
+      nameEl.textContent = founder.name;
+      roleEl.textContent = founder.role;
+      renderQuote(founder.quote);
+      textPanel.classList.remove('is-changing');
+    }, 180);
+  }
+
+  function goTo(index, fromAutoplay = false) {
+    activeIndex = (index + total) % total;
+    updateLayoutVars();
+    updateImages();
+    updateText();
+    if (!fromAutoplay) resetAutoplay();
+  }
+
+  function next(fromAutoplay = false) {
+    goTo(activeIndex + 1, fromAutoplay);
+  }
+
+  function prev() {
+    goTo(activeIndex - 1);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(() => next(true), 5000);
+  }
+
+  prevBtn?.addEventListener('click', () => prev());
+  nextBtn?.addEventListener('click', () => next());
+
+  carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  carousel.addEventListener('mouseleave', resetAutoplay);
+
+  window.addEventListener('keydown', (e) => {
+    const inView = carousel.getBoundingClientRect().top < window.innerHeight &&
+      carousel.getBoundingClientRect().bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+  window.addEventListener('resize', () => {
+    updateLayoutVars();
+    updateImages();
+  });
+
+  // Touch swipe support for mobile
+  let touchStartX = 0;
+  imageStage.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  imageStage.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) < 40) return;
+    if (diff > 0) prev();
+    else next();
+  }, { passive: true });
+
+  updateLayoutVars();
+  updateImages();
+  renderQuote(founders[0].quote);
+  resetAutoplay();
 }
 
-// Start both slideshows with slightly different intervals for visual variety
-initFounderSlideshow('founder1Slideshow', 3000);
-initFounderSlideshow('founder2Slideshow', 3500);
+initFoundersCarousel();
+
+// ===== REVIEWS STACKED CAROUSEL =====
+function initReviewsCarousel() {
+  const carousel = document.getElementById('reviewsCarousel');
+  const stage = document.getElementById('reviewsCarouselStage');
+  const dotsWrap = document.getElementById('reviewCarouselDots');
+  const prevBtn = document.getElementById('reviewCarouselPrev');
+  const nextBtn = document.getElementById('reviewCarouselNext');
+
+  if (!carousel || !stage || !dotsWrap) return;
+
+  const cards = Array.from(stage.querySelectorAll('.review-card'));
+  const total = cards.length;
+  let currentIndex = 0;
+  let exitX = 0;
+  let isAnimating = false;
+  let autoTimer = null;
+
+  let dragStartX = 0;
+  let dragCurrentX = 0;
+  let isDragging = false;
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'review-carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to review ${i + 1}`);
+    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsWrap.querySelectorAll('.review-carousel-dot'));
+
+  function stackIndex(offset) {
+    return (currentIndex + offset) % total;
+  }
+
+  function getCurrentCard() {
+    return cards[currentIndex];
+  }
+
+  function updateStack() {
+    cards.forEach((card, index) => {
+      card.classList.remove(
+        'review-card--current',
+        'review-card--stack-1',
+        'review-card--stack-2',
+        'review-card--hidden',
+        'review-card--exiting-left',
+        'review-card--exiting-right'
+      );
+      card.style.transform = '';
+      card.style.opacity = '';
+
+      if (index === currentIndex) {
+        card.classList.add('review-card--current');
+      } else if (index === stackIndex(1)) {
+        card.classList.add('review-card--stack-1');
+      } else if (index === stackIndex(2)) {
+        card.classList.add('review-card--stack-2');
+      } else {
+        card.classList.add('review-card--hidden');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      const active = i === currentIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    applyDragTransform();
+  }
+
+  function applyDragTransform() {
+    const current = getCurrentCard();
+    if (!current || !isDragging) return;
+
+    const rotate = exitX / 20;
+    current.style.transform = `translate(${exitX}px, 0) scale(1) rotate(${rotate}deg)`;
+    current.style.opacity = String(Math.max(0.4, 1 - Math.abs(exitX) / 400));
+  }
+
+  function clearDragStyles() {
+    const current = getCurrentCard();
+    if (current) {
+      current.style.transform = '';
+      current.style.opacity = '';
+    }
+    exitX = 0;
+    isDragging = false;
+  }
+
+  function advance(direction = 1) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const current = getCurrentCard();
+    const outClass = direction > 0 ? 'review-card--exiting-right' : 'review-card--exiting-left';
+    const outX = direction > 0 ? 120 : -120;
+
+    if (current) {
+      current.classList.add(outClass);
+      current.style.transform = `translate(${outX}px, 0) rotate(${outX / 20}deg)`;
+      current.style.opacity = '0';
+    }
+
+    window.setTimeout(() => {
+      currentIndex = (currentIndex + direction + total) % total;
+      clearDragStyles();
+      updateStack();
+      isAnimating = false;
+      resetAuto();
+    }, 220);
+  }
+
+  function next() {
+    advance(1);
+  }
+
+  function prev() {
+    advance(-1);
+  }
+
+  function goTo(index) {
+    if (isAnimating || index === currentIndex) return;
+    clearDragStyles();
+    currentIndex = ((index % total) + total) % total;
+    updateStack();
+    resetAuto();
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      if (!isDragging && !isAnimating) next();
+    }, 5000);
+  }
+
+  function onPointerDown(e) {
+    if (isAnimating) return;
+    const current = getCurrentCard();
+    if (!current || !current.classList.contains('review-card--current')) return;
+    if (e.target.closest('.review-card-arrow')) return;
+
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragCurrentX = dragStartX;
+    current.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    dragCurrentX = e.clientX;
+    exitX = dragCurrentX - dragStartX;
+    applyDragTransform();
+  }
+
+  function onPointerUp(e) {
+    if (!isDragging) return;
+    const current = getCurrentCard();
+    if (current) {
+      try {
+        current.releasePointerCapture(e.pointerId);
+      } catch (_) {
+        /* ignore */
+      }
+    }
+
+    if (Math.abs(exitX) > 100) {
+      const direction = exitX < 0 ? 1 : -1;
+      isDragging = false;
+      advance(direction);
+    } else {
+      clearDragStyles();
+      updateStack();
+    }
+
+    isDragging = false;
+    resetAuto();
+  }
+
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prev();
+  });
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    next();
+  });
+
+  stage.addEventListener('pointerdown', onPointerDown);
+  stage.addEventListener('pointermove', onPointerMove);
+  stage.addEventListener('pointerup', onPointerUp);
+  stage.addEventListener('pointercancel', onPointerUp);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  carousel.addEventListener('mouseleave', resetAuto);
+
+  updateStack();
+  resetAuto();
+}
+
+initReviewsCarousel();
 
 // ===== GOLD SHIMMER ON SECTION TITLES =====
 const sectionTitles = document.querySelectorAll('.section-title');
