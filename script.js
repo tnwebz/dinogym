@@ -403,7 +403,7 @@ function initFoundersCarousel() {
       const span = document.createElement("span");
       span.className = "quote-word";
       span.style.animationDelay = `${0.025 * i}s`;
-      span.textContent = `${word} `;
+      span.textContent = word;
       quoteEl.appendChild(span);
     });
   }

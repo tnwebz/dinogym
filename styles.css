@@ -844,6 +844,14 @@ iframe {
   gap: 3rem;
 }
 
+.founders-image-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .founders-image-stage {
   position: relative;
   width: 100%;
@@ -936,6 +944,7 @@ iframe {
 
 .founders-quote .quote-word {
   display: inline-block;
+  margin-right: 0.3em;
   opacity: 0;
   filter: blur(10px);
   transform: translateY(5px);
