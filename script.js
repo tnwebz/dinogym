@@ -1197,6 +1197,23 @@ function initSecretShield() {
   const shields = document.querySelectorAll(".secret-shield");
   const modal = document.getElementById("passkey-modal");
   const passkeyInput = document.getElementById("passkey-input");
+  const desktopMenuBtn = document.getElementById("desktopMenuBtn");
+  const desktopShieldDropdown = document.getElementById("desktopShieldDropdown");
+
+  if (desktopMenuBtn && desktopShieldDropdown) {
+    desktopMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isActive = desktopShieldDropdown.classList.toggle("active");
+      desktopMenuBtn.classList.toggle("active", isActive);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!desktopShieldDropdown.contains(e.target) && !desktopMenuBtn.contains(e.target)) {
+        desktopShieldDropdown.classList.remove("active");
+        desktopMenuBtn.classList.remove("active");
+      }
+    });
+  }
 
   if (shields.length > 0 && modal && passkeyInput) {
     let clickCount = 0;
@@ -1216,6 +1233,8 @@ function initSecretShield() {
         if (clickCount === 3) {
           clearTimeout(clickTimer);
           clickCount = 0;
+          if (desktopShieldDropdown) desktopShieldDropdown.classList.remove("active");
+          if (desktopMenuBtn) desktopMenuBtn.classList.remove("active");
           modal.classList.add("active");
           passkeyInput.focus();
         }

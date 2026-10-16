@@ -469,11 +469,20 @@
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
-    <!-- ===== SECRET SHIELD ENTRANCE (DESKTOP) ===== -->
-    <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-      </svg>
+    <!-- ===== DESKTOP LEFT MENU (ADMIN SHIELD ONLY) ===== -->
+    <div class="desktop-admin-menu-wrap" id="desktopAdminMenuWrap">
+      <button class="desktop-menu-btn" id="desktopMenuBtn" aria-label="Admin Navigation" title="Admin Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="desktop-shield-dropdown" id="desktopShieldDropdown">
+        <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+      </div>
     </div>
     <a href="index.html#home" class="logo">
       <img src="images/l1.png" alt="DR DINO FITNESS & GYM Logo" class="logo-img">

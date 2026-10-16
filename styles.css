@@ -3715,15 +3715,110 @@ iframe {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-.desktop-shield {
+/* ===== DESKTOP LEFT 3-LINE MENU (SHIELD ONLY) ===== */
+.desktop-admin-menu-wrap {
   position: absolute;
-  top: 18px;
-  left: 20px;
-  z-index: 1001;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+}
+
+.desktop-menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.desktop-menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.desktop-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+}
+
+.desktop-menu-btn:hover span {
+  background: #ffffff;
+}
+
+.desktop-menu-btn.active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.8);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+.desktop-menu-btn.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--gold);
+}
+
+.desktop-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.desktop-menu-btn.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--gold);
+}
+
+.desktop-shield-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: rgba(12, 13, 16, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75), 0 0 20px rgba(212, 175, 55, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.95);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.desktop-shield-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.desktop-shield-dropdown .desktop-shield {
+  position: static !important;
+  margin: 0 !important;
+  width: 38px;
+  height: 38px;
 }
 
 @media (max-width: 768px) {
-  .desktop-shield {
+  .desktop-admin-menu-wrap {
     display: none !important;
   }
 }
