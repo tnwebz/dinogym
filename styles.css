@@ -1579,6 +1579,31 @@ iframe {
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .home-instagram-embed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .home-instagram-embed .elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f,
+  .home-instagram-embed [class*="elfsight-app"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .home-instagram-embed [class*="elfsight-app"] > div,
+  .home-instagram-embed [class*="elfsight-app"] iframe,
+  .home-instagram-embed [class*="eapps-instagram-feed"] {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
 /* ===== CLASSES ===== */
 .classes-section {
   background: #e9f3f6;
