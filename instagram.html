@@ -459,10 +459,22 @@
     <a href="index.html#reviews" onclick="closeMobile()">Reviews</a>
     <a href="index.html#instagram" onclick="closeMobile()">Instagram</a>
     <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+    <!-- ===== SECRET SHIELD ENTRANCE (MOBILE) ===== -->
+    <div class="secret-shield mobile-shield" title="Authorized Personnel Only">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    </div>
   </div>
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
+    <!-- ===== SECRET SHIELD ENTRANCE (DESKTOP) ===== -->
+    <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    </div>
     <a href="index.html#home" class="logo">
       <img src="images/l1.png" alt="DR DINO FITNESS & GYM Logo" class="logo-img">
       <span class="logo-text">DR <span class="gold">DINO</span></span>
@@ -567,6 +579,18 @@
       </div>
     </div>
   </footer>
+
+  <!-- Passkey Modal for Admin Access -->
+  <div id="passkey-modal" class="passkey-modal">
+    <div class="passkey-container">
+      <input
+        type="password"
+        id="passkey-input"
+        placeholder="ENTER PASSKEY"
+        maxlength="10"
+      />
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

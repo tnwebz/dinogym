@@ -108,10 +108,22 @@
       <a href="#reviews" onclick="closeMobile()">Reviews</a>
       <a href="#instagram" onclick="closeMobile()">Instagram</a>
       <a href="#contact" onclick="closeMobile()">Contact</a>
+      <!-- ===== SECRET SHIELD ENTRANCE (MOBILE) ===== -->
+      <div class="secret-shield mobile-shield" title="Authorized Personnel Only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
+      <!-- ===== SECRET SHIELD ENTRANCE (DESKTOP) ===== -->
+      <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
       <a href="#home" class="logo">
         <img
           src="images/l1.png"
@@ -139,23 +151,26 @@
     <section class="hero" id="home">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <div class="hero-badge">
+        <div class="hero-badge" data-editable="true" data-cms-key="hero_badge">
           <span class="dot"></span>
-          Premium Fitness Destination
+          <span class="editable-text-inner">Premium Fitness Destination</span>
         </div>
         <h1 class="seo-hidden">
           DR DINO FITNESS &amp; GYM: The Ultimate Fitness Destination in
           Chengalpattu
         </h1>
-        <p class="hero-tagline">
+        <p class="hero-tagline" data-editable="true" data-cms-key="hero_tagline">
           No Pain<br /><span class="highlight">No Gain</span><br />Build Your
           Reign.
         </p>
-        <p>
+        <p class="hero-subtitle" data-editable="true" data-cms-key="hero_subtitle">
           Where champions are sculpted and legends are born. Experience
           world-class training in a premium environment designed for peak
           performance.
         </p>
+        <button type="button" class="live-admin-upload-btn hero-upload-btn" onclick="triggerInlineAdminUpload('hero_bg')">
+          📷 Change Hero Background
+        </button>
         <div class="hero-buttons">
           <a href="#contact" class="btn-primary">
             Join Now
@@ -197,6 +212,11 @@
               data-index="1"
             />
           </div>
+          <div class="founder-upload-wrap">
+            <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('founders')">
+              📷 Change Founder Photo
+            </button>
+          </div>
 
           <div class="founders-carousel-content">
             <div
@@ -204,11 +224,11 @@
               id="foundersTextPanel"
               aria-live="polite"
             >
-              <h3 class="founders-name" id="foundersName">Mr Rubesh</h3>
-              <p class="founders-role" id="foundersRole">
+              <h3 class="founders-name" id="foundersName" data-editable="true" data-cms-key="founder_name">Mr Rubesh</h3>
+              <p class="founders-role" id="foundersRole" data-editable="true" data-cms-key="founder_role">
                 Founder &amp; Head Coach
               </p>
-              <p class="founders-quote" id="foundersQuote">
+              <p class="founders-quote" id="foundersQuote" data-editable="true" data-cms-key="founder_quote">
                 A dedicated fitness professional with a vision to revolutionize
                 the training experience. With over a decade of mastery in
                 bodybuilding and nutrition, he has laid the foundation for DR
@@ -383,6 +403,11 @@
         </div>
         <span class="gallery-gateway-arrow" aria-hidden="true">→</span>
       </a>
+      <div style="text-align: center; margin-top: 14px;">
+        <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('gallery')">
+          📸 Direct Upload to Gallery
+        </button>
+      </div>
     </section>
 
     <!-- ===== CLASSES ===== -->
@@ -392,31 +417,43 @@
         <div class="classes-card reveal slide-left">
           <div class="classes-img-wrap">
             <img
+              id="classCardioImg"
               src="images/c1.png"
               alt="Cardio training class at DR DINO FITNESS gym near Periya Natham Chengalpattu"
             />
           </div>
           <div class="classes-text-wrap">
-            <h3 class="classes-label">CARDIO</h3>
-            <p class="classes-desc">
+            <h3 class="classes-label" data-editable="true" data-cms-key="class_cardio_label">CARDIO</h3>
+            <p class="classes-desc" data-editable="true" data-cms-key="class_cardio_desc">
               High-intensity training sessions designed to boost endurance, burn
               calories, and improve cardiovascular health.
             </p>
+            <div class="classes-upload-wrap">
+              <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('class_cardio')">
+                📷 Change Cardio Photo
+              </button>
+            </div>
           </div>
         </div>
         <div class="classes-card reverse reveal slide-right">
           <div class="classes-img-wrap">
             <img
+              id="classStrengthImg"
               src="images/s1.png"
               alt="Strength and weight training session at DR DINO gym Chengalpattu"
             />
           </div>
           <div class="classes-text-wrap">
-            <h3 class="classes-label">STRENGTH TRAINING</h3>
-            <p class="classes-desc">
+            <h3 class="classes-label" data-editable="true" data-cms-key="class_strength_label">STRENGTH TRAINING</h3>
+            <p class="classes-desc" data-editable="true" data-cms-key="class_strength_desc">
               Build muscle, increase strength, and transform your physique with
               our comprehensive strength training programs.
             </p>
+            <div class="classes-upload-wrap">
+              <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('class_strength')">
+                📷 Change Strength Photo
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -870,6 +907,18 @@
         </div>
       </div>
     </footer>
+
+    <!-- Passkey Modal for Admin Access -->
+    <div id="passkey-modal" class="passkey-modal">
+      <div class="passkey-container">
+        <input
+          type="password"
+          id="passkey-input"
+          placeholder="ENTER PASSKEY"
+          maxlength="10"
+        />
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
