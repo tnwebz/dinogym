@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800;1,900&family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="images/logodr.png" />
@@ -93,7 +93,6 @@
     </div>
 
     <!-- Cursor Glow -->
-    <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- Particle Canvas -->
     <canvas id="particleCanvas"></canvas>
@@ -109,8 +108,18 @@
       <a href="#instagram" onclick="closeMobile()">Instagram</a>
       <a href="#contact" onclick="closeMobile()">Contact</a>
       <!-- ===== SECRET SHIELD ENTRANCE (MOBILE) ===== -->
-      <div class="secret-shield mobile-shield" title="Authorized Personnel Only">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div
+        class="secret-shield mobile-shield"
+        title="Authorized Personnel Only"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
       </div>
@@ -120,14 +129,29 @@
     <nav class="navbar" id="navbar">
       <!-- ===== DESKTOP LEFT MENU (ADMIN SHIELD ONLY) ===== -->
       <div class="desktop-admin-menu-wrap" id="desktopAdminMenuWrap">
-        <button class="desktop-menu-btn" id="desktopMenuBtn" aria-label="Admin Navigation" title="Admin Menu">
+        <button
+          class="desktop-menu-btn"
+          id="desktopMenuBtn"
+          aria-label="Admin Navigation"
+          title="Admin Menu"
+        >
           <span></span>
           <span></span>
           <span></span>
         </button>
         <div class="desktop-shield-dropdown" id="desktopShieldDropdown">
-          <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div
+            class="secret-shield desktop-shield"
+            title="Authorized Personnel Only"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
             </svg>
           </div>
@@ -159,87 +183,257 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="home">
       <div class="hero-bg"></div>
-      <div class="hero-content">
-        <div class="hero-badge" data-editable="true" data-cms-key="hero_badge">
-          <span class="dot"></span>
-          <span class="editable-text-inner">Premium Fitness Destination</span>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div
+            class="hero-badge"
+            data-editable="true"
+            data-cms-key="hero_badge"
+          >
+            <span class="dot"></span>
+            <span class="editable-text-inner">Premium Fitness Destination</span>
+          </div>
+          <h1 class="seo-hidden">
+            DR DINO FITNESS &amp; GYM: Best Gym in Chengalpattu
+          </h1>
+          <!-- Iconic High-Impact Title from Reference Design -->
+          <div class="hero-impact-title" aria-label="BE STRONG.">
+            <span class="hero-impact-be">BE</span>
+            <span class="hero-impact-strong">STRONG.</span>
+          </div>
+          <p
+            class="hero-impact-subtitle"
+            data-editable="true"
+            data-cms-key="hero_subtitle"
+          >
+            Gym in Chengalpattu. Open 5:00 AM till 10:00 PM.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn-hero-yellow">
+              Join Now
+              <span class="arrow">→</span>
+            </a>
+          </div>
+          <button
+            type="button"
+            class="live-admin-upload-btn hero-upload-btn"
+            onclick="triggerInlineAdminUpload('hero_bg')"
+          >
+            📷 Change Hero Background
+          </button>
         </div>
-        <h1 class="seo-hidden">
-          DR DINO FITNESS &amp; GYM: The Ultimate Fitness Destination in
-          Chengalpattu
-        </h1>
-        <p class="hero-tagline" data-editable="true" data-cms-key="hero_tagline">
-          No Pain<br /><span class="highlight">No Gain</span><br />Build Your
-          Reign.
-        </p>
-        <p class="hero-subtitle" data-editable="true" data-cms-key="hero_subtitle">
-          Where champions are sculpted and legends are born. Experience
-          world-class training in a premium environment designed for peak
-          performance.
-        </p>
-        <button type="button" class="live-admin-upload-btn hero-upload-btn" onclick="triggerInlineAdminUpload('hero_bg')">
-          📷 Change Hero Background
-        </button>
-        <div class="hero-buttons">
-          <a href="#contact" class="btn-primary">
-            Join Now
-            <span class="arrow">→</span>
-          </a>
-          <a href="#about" class="btn-secondary"> ▶ Explore More </a>
+        <!-- Right side big royal crest emblem -->
+        <div class="hero-right-emblem">
+          <img
+            src="images/bg_img.png"
+            alt="DR DINO Royal Crest Emblem"
+            class="hero-emblem-img"
+          />
         </div>
       </div>
     </section>
 
-    <!-- ===== FOUNDERS CAROUSEL ===== -->
-    <section class="section about founders-carousel-section" id="about">
-      <div class="founders-carousel-header reveal">
-        <div class="section-tag">★ The Founders</div>
-        <h2 class="seo-hidden">Premium Fitness Facilities in Chengalpattu</h2>
-        <h2 class="seo-hidden">
-          Transform Your Body at the Best Gym near Periya Natham
-        </h2>
-        <div class="section-title" aria-hidden="true">Meet The Visionaries</div>
-        <p class="section-subtitle founders-carousel-subtitle">
-          The minds behind DR DINO — united by a passion for excellence and a
-          commitment to transforming lives through fitness.
-        </p>
+    <!-- ===== SECTION 2: MEET THE VISIONARIES (3D TRANSLUCENT CAROUSEL) ===== -->
+    <section
+      class="section about founders-carousel-section cult-scroll-zoom"
+      id="about"
+    >
+      <!-- Background Ambient Glow Orbs -->
+      <div class="founders-bg-glow" aria-hidden="true">
+        <div class="founders-glow-orb founders-glow-orb-1"></div>
+        <div class="founders-glow-orb founders-glow-orb-2"></div>
       </div>
 
-      <div class="founders-carousel reveal" id="foundersCarousel">
-        <div class="founders-carousel-grid">
-          <div class="founders-image-col">
-            <div class="founders-image-stage" id="foundersImageStage">
-              <img
-                src="images/img_2.png"
-                alt="Mr Rubesh, Founder and Head Coach at DR DINO FITNESS Gym Chengalpattu"
-                class="founders-carousel-img"
-                data-index="0"
-              />
-              <img
-                src="images/p1.png"
-                alt="Strategic Lead and Co-founder at DR DINO unisex gym Chengalpattu"
-                class="founders-carousel-img"
-                data-index="1"
-              />
+      <div class="cult-zoom-inner">
+        <!-- Old Content Headers Preserved -->
+        <div class="founders-carousel-header">
+          <h2 class="seo-hidden">Premium Fitness Facilities in Chengalpattu</h2>
+          <h2 class="seo-hidden">
+            Transform Your Body at the Best Gym near Periya Natham
+          </h2>
+          <div class="section-title" aria-hidden="true">
+            Meet The Visionaries
+          </div>
+        </div>
+
+        <!-- 3D Showcase Section (React design translated to high-performance Vanilla) -->
+        <div class="founders-showcase-container" id="foundersCarousel">
+          <div class="founders-showcase-stage" id="foundersImageStage">
+            <!-- Box 0 -->
+            <div class="founder-card-box trancy-box" data-index="0">
+              <div class="founder-card-glass">
+                <div class="founder-photo-container">
+                  <img
+                    src="images/img_2.png"
+                    alt="Mr Rubesh - Founder &amp; Head Coach at DR DINO Gym Chengalpattu"
+                    class="founders-carousel-img"
+                    data-index="0"
+                  />
+                  <div class="trancy-empty-placeholder">
+                    <div class="trancy-placeholder-icon">
+                      <svg
+                        width="36"
+                        height="36"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
+                    <span class="trancy-placeholder-text"
+                      >DR DINO VISIONARY</span
+                    >
+                  </div>
+                </div>
+                <div class="trancy-glass-glare" aria-hidden="true"></div>
+              </div>
             </div>
-            <div class="founder-upload-wrap">
-              <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('founders')">
-                📷 Change Founder Photo
-              </button>
+
+            <!-- Box 1 -->
+            <div class="founder-card-box trancy-box" data-index="1">
+              <div class="founder-card-glass">
+                <div class="founder-photo-container">
+                  <img
+                    src="images/p1.png"
+                    alt="Strategic Lead and Co-founder at DR DINO unisex gym Chengalpattu"
+                    class="founders-carousel-img"
+                    data-index="1"
+                  />
+                  <div class="trancy-empty-placeholder">
+                    <div class="trancy-placeholder-icon">
+                      <svg
+                        width="36"
+                        height="36"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
+                    <span class="trancy-placeholder-text"
+                      >DR DINO VISIONARY</span
+                    >
+                  </div>
+                </div>
+                <div class="trancy-glass-glare" aria-hidden="true"></div>
+              </div>
             </div>
+
+            <!-- Box 2 (Empty frame ready for Cloudinary / upload!) -->
+            <div class="founder-card-box trancy-box" data-index="2">
+              <div class="founder-card-glass">
+                <div class="founder-photo-container">
+                  <img
+                    src=""
+                    alt="DR DINO Visionary"
+                    class="founders-carousel-img"
+                    data-index="2"
+                  />
+                  <div class="trancy-empty-placeholder">
+                    <div class="trancy-placeholder-icon">
+                      <svg
+                        width="36"
+                        height="36"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path
+                          d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
+                    <span class="trancy-placeholder-text"
+                      >DR DINO VISIONARY</span
+                    >
+                  </div>
+                </div>
+                <div class="trancy-glass-glare" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons with Chevron Icons -->
+            <button
+              class="founders-nav-btn founders-nav-prev"
+              id="foundersPrev"
+              type="button"
+              aria-label="Previous Visionary"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button
+              class="founders-nav-btn founders-nav-next"
+              id="foundersNext"
+              type="button"
+              aria-label="Next Visionary"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
           </div>
 
-          <div class="founders-carousel-content">
+          <!-- Dynamic Visionary Bio & Info Panel -->
+          <div class="founders-info-section">
             <div
               class="founders-text-panel"
               id="foundersTextPanel"
               aria-live="polite"
             >
-              <h3 class="founders-name" id="foundersName" data-editable="true" data-cms-key="founder_name">Mr Rubesh</h3>
-              <p class="founders-role" id="foundersRole" data-editable="true" data-cms-key="founder_role">
+              <h3
+                class="founders-name"
+                id="foundersName"
+                data-editable="true"
+                data-cms-key="founder_name"
+              >
+                Mr Rubesh
+              </h3>
+              <p
+                class="founders-role"
+                id="foundersRole"
+                data-editable="true"
+                data-cms-key="founder_role"
+              >
                 Founder &amp; Head Coach
               </p>
-              <p class="founders-quote" id="foundersQuote" data-editable="true" data-cms-key="founder_quote">
+              <p
+                class="founders-quote"
+                id="foundersQuote"
+                data-editable="true"
+                data-cms-key="founder_quote"
+              >
                 A dedicated fitness professional with a vision to revolutionize
                 the training experience. With over a decade of mastery in
                 bodybuilding and nutrition, he has laid the foundation for DR
@@ -247,677 +441,875 @@
               </p>
             </div>
 
-            <div class="founders-arrow-buttons">
+            <div class="founder-upload-wrap">
               <button
-                class="founders-arrow-btn"
-                id="foundersPrev"
                 type="button"
-                aria-label="Previous founder"
+                class="live-admin-upload-btn"
+                onclick="triggerInlineAdminUpload('founders')"
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M15 18l-6-6 6-6"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                class="founders-arrow-btn"
-                id="foundersNext"
-                type="button"
-                aria-label="Next founder"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M9 18l6-6-6-6"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                📷 Change Founder Photo
               </button>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- ===== INFRASTRUCTURE ===== -->
-    <section class="infra-showcase" id="infrastructure">
-      <!-- Sliding Background Images -->
-      <div class="infra-slider">
-        <div class="infra-slider-track">
-          <img
-            src="images/d1.png"
-            alt="Premium weight training equipment at DR DINO Fitness Periya Natham Chengalpattu"
-          />
-          <img
-            src="images/d2.png"
-            alt="State-of-the-art cardio zone at DR DINO Gym Chengalpattu"
-          />
-          <img
-            src="images/d3.png"
-            alt="Functional training area at the best gym in Chengalpattu DR DINO FITNESS"
-          />
-          <img
-            src="images/d1.png"
-            alt="Premium strength training equipment at DR DINO unisex gym Chengalpattu"
-          />
-          <img
-            src="images/d2.png"
-            alt="Advanced cardio machines at DR DINO Fitness Center near Periya Natham"
-          />
-          <img
-            src="images/d3.png"
-            alt="Functional training and bodybuilding zone at DR DINO Gym Chengalpattu"
-          />
+    <!-- ===== INFRASTRUCTURE / INTERIOR DESIGN (VIDEO SHOWCASE) ===== -->
+    <section class="infra-showcase cult-scroll-zoom" id="infrastructure">
+      <div
+        class="cult-zoom-inner"
+        style="height: 100%; width: 100%; position: relative"
+      >
+        <!-- Full-Bleed High-Definition Background Video -->
+        <div class="infra-video-wrap">
+          <video
+            class="infra-bg-video"
+            src="images/dino-interior.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+          ></video>
         </div>
-      </div>
-      <!-- Dark Overlay -->
-      <div class="infra-overlay"></div>
-      <!-- Centered Content -->
-      <div class="infra-content">
-        <div class="infra-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <rect
-              x="4"
-              y="14"
-              width="6"
-              height="8"
-              rx="1.5"
-              stroke="white"
-              stroke-width="2"
-            />
-            <rect
-              x="26"
-              y="14"
-              width="6"
-              height="8"
-              rx="1.5"
-              stroke="white"
-              stroke-width="2"
-            />
-            <line
-              x1="10"
-              y1="18"
-              x2="26"
-              y2="18"
-              stroke="white"
-              stroke-width="2.5"
-              stroke-linecap="round"
-            />
-            <rect
-              x="1"
-              y="15.5"
-              width="3"
-              height="5"
-              rx="1"
-              stroke="white"
-              stroke-width="1.5"
-            />
-            <rect
-              x="32"
-              y="15.5"
-              width="3"
-              height="5"
-              rx="1"
-              stroke="white"
-              stroke-width="1.5"
-            />
-          </svg>
+        <!-- Dark Overlay -->
+        <div class="infra-overlay"></div>
+        <!-- Centered Content -->
+        <div class="infra-content">
+          <h2 class="infra-heading">Where Strength Meets Luxury</h2>
+          <p class="infra-tagline">Designed to Inspire | Built to Perform</p>
         </div>
-        <h2 class="infra-heading">Interior | Design | Branding</h2>
-        <p class="infra-tagline">We won't let you stay ordinary</p>
-        <a href="#contact" class="infra-btn">Get Started</a>
       </div>
     </section>
 
-    <!-- ===== GALLERY GATEWAY ===== -->
-    <section class="gallery-gateway" id="gallery-gateway" aria-label="Gallery">
-      <a href="gallery.html" class="gallery-gateway-card reveal">
-        <div class="gallery-gateway-icon" aria-hidden="true">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-        </div>
-        <div class="gallery-gateway-body">
-          <span class="gallery-gateway-tag">Photo &amp; Video Gallery</span>
-          <h2 class="gallery-gateway-title">View Our Gallery</h2>
-          <p class="gallery-gateway-desc">
-            Training moments, transformations, and gym life — explore the full
-            collection.
+    <!-- ===== CLASSES & PROGRAMS (CULT.FIT FORMAT) ===== -->
+    <section class="classes-section cult-scroll-zoom" id="classes">
+      <div class="cult-zoom-inner">
+        <!-- Section Header -->
+        <div class="classes-header-wrap">
+          <div class="section-tag classes-tag">★ Training Formats</div>
+          <h2 class="classes-main-title">ELITE FITNESS PROGRAMS</h2>
+          <p class="classes-main-subtitle">
+            Engineered for pure transformation. Choose your training discipline
+            and build your legacy.
           </p>
         </div>
-        <span class="gallery-gateway-arrow" aria-hidden="true">→</span>
-      </a>
-      <div style="text-align: center; margin-top: 14px;">
-        <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('gallery')">
-          📸 Direct Upload to Gallery
-        </button>
-      </div>
-    </section>
 
-    <!-- ===== CLASSES ===== -->
-    <section class="classes-section" id="classes">
-      <h2 class="classes-title">CLASSES</h2>
-      <div class="classes-grid">
-        <div class="classes-card reveal slide-left">
-          <div class="classes-img-wrap">
-            <img
-              id="classCardioImg"
-              src="images/c1.png"
-              alt="Cardio training class at DR DINO FITNESS gym near Periya Natham Chengalpattu"
-            />
-          </div>
-          <div class="classes-text-wrap">
-            <h3 class="classes-label" data-editable="true" data-cms-key="class_cardio_label">CARDIO</h3>
-            <p class="classes-desc" data-editable="true" data-cms-key="class_cardio_desc">
-              High-intensity training sessions designed to boost endurance, burn
-              calories, and improve cardiovascular health.
-            </p>
-            <div class="classes-upload-wrap">
-              <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('class_cardio')">
-                📷 Change Cardio Photo
+        <!-- 3-Card Grid (Responsive: 3 cols desktop, Accordion stack mobile) -->
+        <div class="cult-classes-grid" id="cultClassesGrid">
+          <!-- Card 1: Cardio -->
+          <article class="cult-class-card" data-card-index="0">
+            <div class="cult-card-media-wrap">
+              <video
+                id="classCardVideo0"
+                class="cult-class-card-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+              >
+                <source src="images/cardio.mp4" type="video/mp4" />
+              </video>
+              <div class="cult-card-media-gradient"></div>
+
+              <!-- Card Header Info overlaid on video bottom -->
+              <div
+                class="cult-card-header-bar"
+                onclick="toggleCultCardAccordion(0)"
+              >
+                <div class="cult-card-title-group">
+                  <h3
+                    class="cult-card-title"
+                    data-editable="true"
+                    data-cms-key="class_0_title"
+                  >
+                    Cardio
+                  </h3>
+                  <p
+                    class="cult-card-subtitle"
+                    data-editable="true"
+                    data-cms-key="class_0_sub"
+                  >
+                    High-intensity endurance &amp; stamina conditioning
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="cult-card-chevron-btn"
+                  aria-label="Toggle details"
+                >
+                  <svg
+                    class="cult-chevron-icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Body / Checklist (Collapsible on mobile, always visible on desktop) -->
+            <div class="cult-card-body">
+              <ul class="cult-checklist">
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>High-intensity interval &amp; stamina circuits</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Sprint machines, rowing &amp; air bikes</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>VO2 max &amp; endurance optimization</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Real-time heart rate &amp; calorie burn tracking</span>
+                </li>
+              </ul>
+
+              <button
+                type="button"
+                class="cult-know-more-btn"
+                onclick="openClassScheduleModal('Cardio')"
+              >
+                KNOW MORE
               </button>
             </div>
-          </div>
-        </div>
-        <div class="classes-card reverse reveal slide-right">
-          <div class="classes-img-wrap">
-            <img
-              id="classStrengthImg"
-              src="images/s1.png"
-              alt="Strength and weight training session at DR DINO gym Chengalpattu"
-            />
-          </div>
-          <div class="classes-text-wrap">
-            <h3 class="classes-label" data-editable="true" data-cms-key="class_strength_label">STRENGTH TRAINING</h3>
-            <p class="classes-desc" data-editable="true" data-cms-key="class_strength_desc">
-              Build muscle, increase strength, and transform your physique with
-              our comprehensive strength training programs.
-            </p>
-            <div class="classes-upload-wrap">
-              <button type="button" class="live-admin-upload-btn" onclick="triggerInlineAdminUpload('class_strength')">
-                📷 Change Strength Photo
+          </article>
+
+          <!-- Card 2: Strength Training -->
+          <article class="cult-class-card" data-card-index="1">
+            <div class="cult-card-media-wrap">
+              <video
+                id="classCardVideo1"
+                class="cult-class-card-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+              >
+                <source src="images/straining.mp4" type="video/mp4" />
+              </video>
+              <div class="cult-card-media-gradient"></div>
+
+              <!-- Card Header Info overlaid on video bottom -->
+              <div
+                class="cult-card-header-bar"
+                onclick="toggleCultCardAccordion(1)"
+              >
+                <div class="cult-card-title-group">
+                  <h3
+                    class="cult-card-title"
+                    data-editable="true"
+                    data-cms-key="class_1_title"
+                  >
+                    Strength Training
+                  </h3>
+                  <p
+                    class="cult-card-subtitle"
+                    data-editable="true"
+                    data-cms-key="class_1_sub"
+                  >
+                    Heavy compound lifts &amp; biomechanical hypertrophy
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="cult-card-chevron-btn"
+                  aria-label="Toggle details"
+                >
+                  <svg
+                    class="cult-chevron-icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Body / Checklist -->
+            <div class="cult-card-body">
+              <ul class="cult-checklist">
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span
+                    >World-class heavy lifting &amp; plate-loaded
+                    equipment</span
+                  >
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span
+                    >Olympic barbells, power cages &amp; calibrated
+                    dumbbells</span
+                  >
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Certified championship form correction mentors</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Progressive overload &amp; power biomechanics</span>
+                </li>
+              </ul>
+
+              <button
+                type="button"
+                class="cult-know-more-btn"
+                onclick="openClassScheduleModal('Strength Training')"
+              >
+                KNOW MORE
               </button>
             </div>
-          </div>
+          </article>
+
+          <!-- Card 3: Transform -->
+          <article class="cult-class-card active-mobile" data-card-index="2">
+            <div class="cult-card-media-wrap">
+              <video
+                id="classCardVideo2"
+                class="cult-class-card-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+              >
+                <source src="images/transform.mp4" type="video/mp4" />
+              </video>
+              <div class="cult-card-media-gradient"></div>
+
+              <!-- Card Header Info overlaid on video bottom -->
+              <div
+                class="cult-card-header-bar"
+                onclick="toggleCultCardAccordion(2)"
+              >
+                <div class="cult-card-title-group">
+                  <h3
+                    class="cult-card-title"
+                    data-editable="true"
+                    data-cms-key="class_2_title"
+                  >
+                    Transform
+                  </h3>
+                  <p
+                    class="cult-card-subtitle"
+                    data-editable="true"
+                    data-cms-key="class_2_sub"
+                  >
+                    Online sustainable weight loss program
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="cult-card-chevron-btn"
+                  aria-label="Toggle details"
+                >
+                  <svg
+                    class="cult-chevron-icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card Body / Checklist -->
+            <div class="cult-card-body">
+              <ul class="cult-checklist">
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Custom workout plans</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Daily habits + progress</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Personal coach who checks in daily</span>
+                </li>
+                <li>
+                  <span class="cult-check-icon">✓</span>
+                  <span>Tailored meal plans</span>
+                </li>
+              </ul>
+
+              <button
+                type="button"
+                class="cult-know-more-btn"
+                onclick="openClassScheduleModal('Transform')"
+              >
+                KNOW MORE
+              </button>
+            </div>
+          </article>
         </div>
       </div>
-      <button class="classes-schedule-btn" id="scheduleBtn" type="button">
-        PRICING
-      </button>
     </section>
-
-    <!-- Schedule Modal -->
-    <div id="scheduleModal" class="schedule-modal">
-      <div class="schedule-modal-backdrop"></div>
-      <div class="schedule-modal-content">
-        <button class="schedule-modal-close" id="scheduleModalClose">
-          &times;
-        </button>
-        <img
-          src="images/sh.png"
-          alt="DR DINO FITNESS Gym Chengalpattu class schedule and training timetable"
-        />
-      </div>
-    </div>
-
-    <script>
-      const scheduleBtn = document.getElementById("scheduleBtn");
-      const scheduleModal = document.getElementById("scheduleModal");
-      const scheduleModalClose = document.getElementById("scheduleModalClose");
-      const scheduleBackdrop = scheduleModal.querySelector(
-        ".schedule-modal-backdrop",
-      );
-
-      scheduleBtn.addEventListener("click", () =>
-        scheduleModal.classList.add("active"),
-      );
-      scheduleModalClose.addEventListener("click", () =>
-        scheduleModal.classList.remove("active"),
-      );
-      scheduleBackdrop.addEventListener("click", () =>
-        scheduleModal.classList.remove("active"),
-      );
-    </script>
 
     <!-- ===== INSTAGRAM FEED (on homepage) ===== -->
-    <section class="home-instagram section" id="instagram">
-      <div class="home-instagram-header reveal">
-        <div class="section-tag home-instagram-tag">📷 Instagram</div>
-        <h2 class="section-title home-instagram-title">
-          Follow Our Daily Grind
-        </h2>
-        <p class="section-subtitle home-instagram-subtitle">
-          Stay connected with DR DINO — workouts, wins, and behind-the-scenes
-          from our community.
-        </p>
-        <a
-          href="https://www.instagram.com/shanmugammanishanmugam/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="home-instagram-follow"
-          >Follow Us ↗</a
-        >
-      </div>
-      <div class="home-instagram-embed reveal">
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div
-          class="elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f"
-          data-elfsight-app-lazy
-        ></div>
+    <section class="home-instagram section cult-scroll-zoom" id="instagram">
+      <div class="cult-zoom-inner">
+        <div class="home-instagram-header reveal">
+          <div class="section-tag home-instagram-tag">📷 Instagram</div>
+          <h2 class="section-title home-instagram-title">
+            Follow Our Daily Grind
+          </h2>
+          <p class="section-subtitle home-instagram-subtitle">
+            Stay connected with DR DINO — workouts, wins, and behind-the-scenes
+            from our community.
+          </p>
+          <a
+            href="https://www.instagram.com/shanmugammanishanmugam/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="home-instagram-follow"
+            >Follow Us ↗</a
+          >
+        </div>
+        <div class="home-instagram-embed reveal">
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div
+            class="elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f"
+            data-elfsight-app-lazy
+          ></div>
+        </div>
       </div>
     </section>
 
     <!-- ===== REVIEWS ===== -->
-    <section class="section reviews" id="reviews">
-      <div class="reveal reviews-header">
-        <div class="section-tag reviews-tag">💬 Google Reviews</div>
-        <h2 class="seo-hidden">Join the DR DINO Family in Chengalpattu</h2>
-        <div class="section-title" aria-hidden="true">Join The Family</div>
-        <a
-          href="https://www.google.com/search?q=chengelpattu+dr+dino+gym&oq=chengelpattu+dr+dino+gym&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCggCEAAYgAQYogQyCggDEAAYgAQYogQyCggEEAAYgAQYogTSAQg3NjA0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8#lrd=0x3a52fd6b894c5171:0xde3f69f3b4abe837,3,,,,"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rate-us-btn"
-          >⭐ Rate Us on Google</a
-        >
-        <p class="section-subtitle reviews-subtitle">
-          Real stories from real members. DR DINO FITNESS & GYM isn't just a gym
-          — it's a family that transforms lives every single day.
-        </p>
-      </div>
-      <div class="reviews-carousel reveal" id="reviewsCarousel">
-        <div class="reviews-carousel-stage" id="reviewsCarouselStage">
-          <div class="review-card-arrows">
-            <button
-              type="button"
-              class="review-card-arrow review-card-arrow--prev"
-              id="reviewCarouselPrev"
-              aria-label="Previous review"
-            >
-              &larr;
-            </button>
-            <button
-              type="button"
-              class="review-card-arrow review-card-arrow--next"
-              id="reviewCarouselNext"
-              aria-label="Next review"
-            >
-              &rarr;
-            </button>
-          </div>
-          <article class="review-card" data-index="0">
-            <div class="review-card-image">
-              <img
-                src="images/r1.png"
-                alt="5-star Google review for DR DINO FITNESS Gym Chengalpattu from a satisfied member"
-              />
-            </div>
-          </article>
-          <article class="review-card" data-index="1">
-            <div class="review-card-image">
-              <img
-                src="images/r2.png"
-                alt="Member testimonial praising DR DINO as the best gym near Periya Natham"
-              />
-            </div>
-          </article>
-          <article class="review-card" data-index="2">
-            <div class="review-card-image">
-              <img
-                src="images/r3.png"
-                alt="Positive review for DR DINO unisex gym Chengalpattu training programs"
-              />
-            </div>
-          </article>
-          <article class="review-card" data-index="3">
-            <div class="review-card-image">
-              <img
-                src="images/r4.png"
-                alt="Google review highlighting premium equipment at DR DINO FITNESS Chengalpattu"
-              />
-            </div>
-          </article>
-          <article class="review-card" data-index="4">
-            <div class="review-card-image">
-              <img
-                src="images/r5.png"
-                alt="Member transformation success story at DR DINO Gym Chengalpattu"
-              />
-            </div>
-          </article>
-          <article class="review-card" data-index="5">
-            <div class="review-card-image">
-              <img
-                src="images/r6.png"
-                alt="Five-star rated DR DINO FITNESS gym review from Chengalpattu member"
-              />
-            </div>
-          </article>
+    <section class="section reviews cult-scroll-zoom" id="reviews">
+      <div class="cult-zoom-inner">
+        <div class="reveal reviews-header">
+          <div class="section-tag reviews-tag">💬 Google Reviews</div>
+          <br />
+          <h2 class="seo-hidden">Join the DR DINO Family in Chengalpattu</h2>
+
+          <a
+            href="https://www.google.com/search?q=chengelpattu+dr+dino+gym&oq=chengelpattu+dr+dino+gym&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCggCEAAYgAQYogQyCggDEAAYgAQYogQyCggEEAAYgAQYogTSAQg3NjA0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8#lrd=0x3a52fd6b894c5171:0xde3f69f3b4abe837,3,,,,"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rate-us-btn"
+            >⭐ Rate Us on Google</a
+          >
+          <p class="section-subtitle reviews-subtitle">
+            Real stories from real members. DR DINO FITNESS & GYM isn't just a
+            gym — it's a family that transforms lives every single day.
+          </p>
         </div>
-        <div
-          class="review-carousel-dots"
-          id="reviewCarouselDots"
-          role="tablist"
-          aria-label="Review slides"
-        ></div>
+        <div class="reviews-carousel reveal" id="reviewsCarousel">
+          <div class="reviews-carousel-stage" id="reviewsCarouselStage">
+            <div class="review-card-arrows">
+              <button
+                type="button"
+                class="review-card-arrow review-card-arrow--prev"
+                id="reviewCarouselPrev"
+                aria-label="Previous review"
+              >
+                &larr;
+              </button>
+              <button
+                type="button"
+                class="review-card-arrow review-card-arrow--next"
+                id="reviewCarouselNext"
+                aria-label="Next review"
+              >
+                &rarr;
+              </button>
+            </div>
+            <article class="review-card" data-index="0">
+              <div class="review-card-image">
+                <img
+                  src="images/r1.png"
+                  alt="5-star Google review for DR DINO FITNESS Gym Chengalpattu from a satisfied member"
+                />
+              </div>
+            </article>
+            <article class="review-card" data-index="1">
+              <div class="review-card-image">
+                <img
+                  src="images/r2.png"
+                  alt="Member testimonial praising DR DINO as the best gym near Periya Natham"
+                />
+              </div>
+            </article>
+            <article class="review-card" data-index="2">
+              <div class="review-card-image">
+                <img
+                  src="images/r3.png"
+                  alt="Positive review for DR DINO unisex gym Chengalpattu training programs"
+                />
+              </div>
+            </article>
+            <article class="review-card" data-index="3">
+              <div class="review-card-image">
+                <img
+                  src="images/r4.png"
+                  alt="Google review highlighting premium equipment at DR DINO FITNESS Chengalpattu"
+                />
+              </div>
+            </article>
+            <article class="review-card" data-index="4">
+              <div class="review-card-image">
+                <img
+                  src="images/r5.png"
+                  alt="Member transformation success story at DR DINO Gym Chengalpattu"
+                />
+              </div>
+            </article>
+            <article class="review-card" data-index="5">
+              <div class="review-card-image">
+                <img
+                  src="images/r6.png"
+                  alt="Five-star rated DR DINO FITNESS gym review from Chengalpattu member"
+                />
+              </div>
+            </article>
+          </div>
+          <div
+            class="review-carousel-dots"
+            id="reviewCarouselDots"
+            role="tablist"
+            aria-label="Review slides"
+          ></div>
+        </div>
       </div>
     </section>
 
     <!-- ===== CONTACT ===== -->
-    <section class="contact-v2" id="contact">
-      <!-- Animated gradient blobs background -->
-      <div class="contact-v2-blobs">
-        <div class="contact-blob contact-blob--1"></div>
-        <div class="contact-blob contact-blob--2"></div>
-        <div class="contact-blob contact-blob--3"></div>
-      </div>
-
-      <div class="contact-v2-inner">
-        <!-- Left: Motivational headline -->
-        <div class="contact-v2-left reveal">
-          <div class="contact-v2-tag">📍 Get In Touch</div>
-          <h2 class="contact-v2-headline">
-            Let's build<br />something<br /><span class="contact-v2-highlight"
-              >amazing</span
-            ><br />together!
-          </h2>
-          <div class="contact-v2-info-row">
-            <a
-              href="https://www.google.com/maps/dir/?api=1&destination=12.6819,79.9888"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-v2-info-chip"
-            >
-              <span class="contact-v2-chip-icon">📍</span>
-              <span>Periya Natham, Chengalpattu</span>
-            </a>
-            <a href="tel:+917598917523" class="contact-v2-info-chip">
-              <span class="contact-v2-chip-icon">📞</span>
-              <span>+91 7598917523</span>
-            </a>
-          </div>
-          <div class="contact-v2-hours">
-            <span class="contact-v2-chip-icon">⏰</span>
-            <span>Mon - Sat: 5:00 AM — 10:00 PM</span>
-          </div>
-          <h2 class="seo-hidden">
-            Contact DR DINO FITNESS & GYM Chengalpattu - Get In Touch Today
-          </h2>
+    <section class="contact-v2 cult-scroll-zoom" id="contact">
+      <div class="cult-zoom-inner" style="position: relative; width: 100%">
+        <!-- Animated gradient blobs background -->
+        <div class="contact-v2-blobs">
+          <div class="contact-blob contact-blob--1"></div>
+          <div class="contact-blob contact-blob--2"></div>
+          <div class="contact-blob contact-blob--3"></div>
         </div>
 
-        <!-- Right: Dark form card -->
-        <div class="contact-v2-right reveal">
-          <!-- Decorative circle -->
-          <div class="contact-v2-deco-circle"></div>
-
-          <div class="contact-v2-card">
-            <h3 class="contact-v2-card-title">Reach out to us today! ✨</h3>
-
-            <div class="contact-v2-mail-info">
-              <span class="contact-v2-mail-label">Mail us at</span>
+        <div class="contact-v2-inner">
+          <!-- Left: Motivational headline -->
+          <div class="contact-v2-left reveal">
+            <h2 class="contact-v2-headline">
+              Let's build<br /><span class="contact-v2-highlight"
+                >together!</span
+              ><br />
+            </h2>
+            <div class="contact-v2-info-row">
               <a
-                href="mailto:drdinofitness@gmail.com"
-                class="contact-v2-mail-link"
-                >drdinofitness@gmail.com</a
+                href="https://www.google.com/maps/dir/?api=1&destination=12.6819,79.9888"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-v2-info-chip"
               >
-            </div>
-
-            <div class="contact-v2-social-row">
-              <span class="contact-v2-or">OR</span>
-              <a href="#" class="contact-v2-social-icon" aria-label="Instagram">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                  />
-                </svg>
+                <span class="contact-v2-chip-icon">📍</span>
+                <span>Periya Natham, Chengalpattu</span>
               </a>
-              <a href="#" class="contact-v2-social-icon" aria-label="Facebook">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </a>
-              <a href="#" class="contact-v2-social-icon" aria-label="YouTube">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                  />
-                </svg>
+              <a href="tel:+917598917523" class="contact-v2-info-chip">
+                <span class="contact-v2-chip-icon">📞</span>
+                <span>+91 7598917523</span>
               </a>
             </div>
+            <div class="contact-v2-hours">
+              <span class="contact-v2-chip-icon">⏰</span>
+              <span>Mon - Sat: 5:00 AM — 10:00 PM</span>
+            </div>
+            <h2 class="seo-hidden">
+              Contact DR DINO FITNESS & GYM Chengalpattu - Get In Touch Today
+            </h2>
+          </div>
 
-            <div class="contact-v2-divider"></div>
+          <!-- Right: Dark form card with glassy blue finish -->
+          <div class="contact-v2-right reveal">
+            <div class="contact-v2-card">
+              <h3 class="contact-v2-card-title">Reach out to us today!</h3>
 
-            <p class="contact-v2-form-label">Leave us a brief message</p>
+              <div class="contact-v2-mail-info"></div>
 
-            <form
-              class="contact-v2-form"
-              id="contactForm"
-              data-netlify="true"
-              name="Gym-Leads"
-            >
-              <div class="contact-v2-form-row">
-                <div class="contact-v2-form-group">
-                  <label for="name">Your name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-                <div class="contact-v2-form-group">
-                  <label for="phone">Phone</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="+91 XXXXX XXXXX"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="contact-v2-form-group">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-
-              <div class="contact-v2-form-group">
-                <label for="message"
-                  >Briefly describe your fitness goals...</label
+              <div class="contact-v2-social-row">
+                <span class="contact-v2-or">OR</span>
+                <a
+                  href="#"
+                  class="contact-v2-social-icon"
+                  aria-label="Instagram"
                 >
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Briefly describe your fitness goals..."
-                  rows="3"
-                ></textarea>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="#"
+                  class="contact-v2-social-icon"
+                  aria-label="Facebook"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                </a>
+                <a href="#" class="contact-v2-social-icon" aria-label="YouTube">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                    />
+                  </svg>
+                </a>
               </div>
 
-              <div class="contact-v2-form-group">
-                <p class="contact-v2-checkbox-title">I'm looking for...</p>
-                <div class="contact-v2-checkbox-grid">
-                  <label class="contact-v2-checkbox">
+              <div class="contact-v2-divider"></div>
+
+              <p class="contact-v2-form-label">Leave us a brief message</p>
+
+              <form
+                class="contact-v2-form"
+                id="contactForm"
+                data-netlify="true"
+                name="Gym-Leads"
+              >
+                <div class="contact-v2-form-row">
+                  <div class="contact-v2-form-group">
+                    <label for="name">Your name</label>
                     <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Weight Training"
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Your name"
+                      required
                     />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Weight Training</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
+                  </div>
+                  <div class="contact-v2-form-group">
+                    <label for="phone">Phone</label>
                     <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Bodybuilding"
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+91 XXXXX XXXXX"
+                      required
                     />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Bodybuilding</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Cardio & Endurance"
-                    />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Cardio & Endurance</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Personal Training"
-                    />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Personal Training</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Group Classes"
-                    />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Group Classes</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="General Fitness"
-                    />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>General Fitness</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input
-                      type="checkbox"
-                      name="interest[]"
-                      value="Diet Consultation"
-                    />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Diet Consultation</span>
-                  </label>
-                  <label class="contact-v2-checkbox">
-                    <input type="checkbox" name="interest[]" value="Other" />
-                    <span class="contact-v2-checkmark"></span>
-                    <span>Other</span>
-                  </label>
+                  </div>
                 </div>
-              </div>
 
-              <button type="submit" class="contact-v2-submit" id="submitBtn">
-                Send a message
-              </button>
-            </form>
+                <div class="contact-v2-form-group">
+                  <label for="interest" class="contact-v2-select-label"
+                    >I'm looking for...</label
+                  >
+                  <div class="contact-v2-select-wrapper">
+                    <select
+                      id="interest"
+                      name="interest"
+                      class="contact-v2-select"
+                      required
+                    >
+                      <option value="" disabled selected>
+                        Select your training focus...
+                      </option>
+                      <option value="Weight Training">Weight Training</option>
+                      <option value="Bodybuilding">Bodybuilding</option>
+                      <option value="Cardio &amp; Endurance">
+                        Cardio &amp; Endurance
+                      </option>
+                      <option value="Personal Training">
+                        Personal Training
+                      </option>
+                      <option value="Group Classes">Group Classes</option>
+                      <option value="General Fitness">General Fitness</option>
+                      <option value="Diet Consultation">
+                        Diet Consultation
+                      </option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <div class="contact-v2-select-arrow" aria-hidden="true">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="contact-v2-submit" id="submitBtn">
+                  Send a message
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#home" class="logo">
-            <span class="logo-text">DR <span class="gold">DINO</span></span>
-          </a>
-          <p>
-            A world-class royal fitness destination where champions are forged.
-            Premium equipment, expert coaches, and a legacy of transformation.
+    <footer class="footer" id="mainFooter">
+      <div class="footer-inner-container">
+        <!-- Brand Crest / Header -->
+        <div class="footer-brand-wrap">
+          <img
+            src="images/dino-logo.png"
+            alt="DR DINO FITNESS &amp; GYM"
+            class="footer-logo-img"
+          />
+          <h3 class="footer-brand-title">DR DINO FITNESS &amp; GYM</h3>
+          <p class="footer-brand-subtitle">
+            CHENGALPATTU • ELITE STRENGTH &amp; CARDIO PERFORMANCE
           </p>
         </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#infrastructure">Facilities</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
+
+        <!-- 4-Action Quick Connect Bar (Solid Black Luxury Theme, matches user reference format) -->
+        <div class="footer-action-bar">
+          <!-- 1. Call -->
+          <a
+            href="tel:+917598917523"
+            class="footer-action-item action-call"
+            aria-label="Call DR DINO Gym"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+            </div>
+            <span class="footer-action-label">Call</span>
+          </a>
+
+          <!-- 2. Instagram -->
+          <a
+            href="https://www.instagram.com/dr_dino_fitness_gym/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-action-item action-insta"
+            aria-label="DR DINO Instagram"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+            <span class="footer-action-label">Instagram</span>
+          </a>
+
+          <!-- 3. Mail -->
+          <a
+            href="mailto:drdinofitness@gmail.com"
+            class="footer-action-item action-mail"
+            aria-label="Email DR DINO Gym"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <span class="footer-action-label">Mail</span>
+          </a>
+
+          <!-- 4. WhatsApp -->
+          <a
+            href="https://wa.me/917598917523?text=Hi%20DR%20DINO%20Fitness%2C%20I%20want%20to%20know%20more%20about%20gym%20membership!"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-action-item action-whatsapp"
+            aria-label="WhatsApp Chat"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                ></path>
+              </svg>
+            </div>
+            <span class="footer-action-label">WhatsApp</span>
+          </a>
         </div>
-        <div>
-          <h4>Programs</h4>
-          <ul>
-            <li><a href="#">Weight Training</a></li>
-            <li><a href="#">Bodybuilding</a></li>
-            <li><a href="#">Personal Training</a></li>
-            <li><a href="#">Group Classes</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <ul>
-            <li><a href="#">Membership Plans</a></li>
-            <li><a href="#">Free Trial</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 DR DINO FITNESS & GYM. All rights reserved.</span>
-        <div class="footer-socials">
-          <a href="" target="_blank" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="YouTube">▶</a>
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Twitter">𝕏</a>
+
+        <div class="footer-bottom-credit">
+          <span>© 2026 DR DINO FITNESS &amp; GYM. All rights reserved.</span>
+          <span class="footer-credit-sub"
+            >Built for Peak Human Performance</span
+          >
         </div>
       </div>
     </footer>
+
+    <!-- Fixed Mobile Bottom Action Dock (matches user reference mobile action bar) -->
+    <nav class="mobile-action-dock" aria-label="Quick Contact Actions">
+      <a href="tel:+917598917523" class="dock-item dock-call">
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </div>
+        <span class="dock-label">Call</span>
+      </a>
+
+      <a
+        href="https://www.instagram.com/dr_dino_fitness_gym/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dock-item dock-insta"
+      >
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </div>
+        <span class="dock-label">Instagram</span>
+      </a>
+
+      <a href="mailto:drdinofitness@gmail.com" class="dock-item dock-mail">
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <span class="dock-label">Mail</span>
+      </a>
+
+      <a
+        href="https://wa.me/917598917523?text=Hi%20DR%20DINO%20Fitness%2C%20I%20want%20to%20know%20more%20about%20gym%20membership!"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dock-item dock-whatsapp"
+      >
+        <div class="dock-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            ></path>
+          </svg>
+        </div>
+        <span class="dock-label">WhatsApp</span>
+      </a>
+    </nav>
 
     <!-- Passkey Modal for Admin Access -->
     <div id="passkey-modal" class="passkey-modal">
@@ -930,6 +1322,11 @@
         />
       </div>
     </div>
+
+    <!-- GSAP, ScrollTrigger & Lenis for Smooth Scroll & Zoom Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
     <script src="script.js"></script>
   </body>

@@ -517,22 +517,8 @@
         </p>
       </div>
 
-      <!-- ===== TAB BUTTONS ===== -->
-      <div class="gallery-tabs">
-        <button
-          class="gallery-tab active"
-          id="tabPhotos"
-          onclick="switchTab('photos')"
-        >
-          📸 Photos
-        </button>
-        <button
-          class="gallery-tab"
-          id="tabVideos"
-          onclick="switchTab('videos')"
-        >
-          🎬 Videos
-        </button>
+      <!-- ===== GALLERY ACTIONS ===== -->
+      <div class="gallery-actions-wrap" style="text-align: center; margin-bottom: 36px;">
         <button
           type="button"
           class="live-admin-upload-btn"
@@ -544,17 +530,14 @@
 
       <!-- Shared loader -->
       <div id="gallery-loader" class="gallery-loader-msg" style="display: none">
-        Loading...
+        Loading photos...
       </div>
 
-      <!-- Photos Grid (visible by default) -->
+      <!-- Photos Grid (Pure Photo Showcase) -->
       <div
         class="gallery-masonry gallery-panel active"
         id="photo-gallery"
       ></div>
-
-      <!-- Videos Grid (hidden by default) -->
-      <div class="gallery-masonry gallery-panel" id="video-gallery"></div>
 
       <style>
         .gallery-tabs {
@@ -759,28 +742,8 @@
           });
         });
 
-        function switchTab(tab) {
-          const tabPhotos = document.getElementById("tabPhotos");
-          const tabVideos = document.getElementById("tabVideos");
-          const photoPanel = document.getElementById("photo-gallery");
-          const videoPanel = document.getElementById("video-gallery");
-
-          if (tab === "photos") {
-            tabPhotos.classList.add("active");
-            tabVideos.classList.remove("active");
-            photoPanel.classList.add("active");
-            videoPanel.classList.remove("active");
-          } else {
-            tabVideos.classList.add("active");
-            tabPhotos.classList.remove("active");
-            videoPanel.classList.add("active");
-            photoPanel.classList.remove("active");
-          }
-        }
-
         document.addEventListener("DOMContentLoaded", async () => {
           const photoGallery = document.getElementById("photo-gallery");
-          const videoGallery = document.getElementById("video-gallery");
           const loader = document.getElementById("gallery-loader");
 
           try {
@@ -789,10 +752,8 @@
             const cloudName = "ddq8m4oec";
             const tag = "gym_gallery";
             const imageListUrl = `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`;
-            const videoListUrl = `https://res.cloudinary.com/${cloudName}/video/list/${tag}.json`;
 
             let imageResources = [];
-            let videoResources = [];
 
             try {
               const imageRes = await fetch(imageListUrl);
@@ -804,111 +765,82 @@
               console.error("Image list fetch skipped/errored", e);
             }
 
-            try {
-              const videoRes = await fetch(videoListUrl);
-              if (videoRes.ok) {
-                const data = await videoRes.json();
-                videoResources = data.resources || [];
-              }
-            } catch (e) {
-              console.error("Video list fetch skipped/errored", e);
-            }
-
             loader.style.display = "none";
 
-            let allMedia = [...imageResources, ...videoResources];
-
-            // Sort newest to oldest
-            allMedia.sort(
-              (a, b) => new Date(b.created_at) - new Date(a.created_at),
+            // Filter strictly for image formats only
+            const imageFormats = ["jpg", "jpeg", "png", "webp", "avif"];
+            let photos = imageResources.filter((r) =>
+              imageFormats.includes((r.format || "").toLowerCase())
             );
 
-            if (allMedia.length === 0) {
+            // Sort newest to oldest
+            photos.sort(
+              (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+
+            if (photos.length === 0) {
               photoGallery.innerHTML =
                 '<div class="gallery-empty"><div class="empty-icon">📷</div><p>No photos available yet.</p></div>';
-              videoGallery.innerHTML =
-                '<div class="gallery-empty"><div class="empty-icon">🎥</div><p>No videos available yet.</p></div>';
               return;
             }
 
-            const videoFormats = ["mp4", "mov", "webm"];
             let photoCount = 0;
-            let videoCount = 0;
 
             // Bandwidth-optimized IntersectionObserver for true lazy loading
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  const img = entry.target;
-                  const dataSrc = img.dataset.src;
-                  if (dataSrc) {
-                    img.src = dataSrc;
-                    img.removeAttribute("data-src");
-                    img.onload = () => img.classList.add("loaded");
+            const imageObserver = new IntersectionObserver(
+              (entries, observer) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const dataSrc = img.dataset.src;
+                    if (dataSrc) {
+                      img.src = dataSrc;
+                      img.removeAttribute("data-src");
+                      img.onload = () => img.classList.add("loaded");
+                    }
+                    observer.unobserve(img);
                   }
-                  observer.unobserve(img);
-                }
-              });
-            }, {
-              rootMargin: "250px 0px", // Preload slightly before scrolling into view
-              threshold: 0.01
-            });
+                });
+              },
+              {
+                rootMargin: "250px 0px",
+                threshold: 0.01,
+              }
+            );
 
-            allMedia.forEach((resource) => {
+            photos.forEach((resource) => {
               const card = document.createElement("div");
               card.className = "gallery-item-card";
-              const isVideo = videoFormats.includes(resource.format);
 
-              if (isVideo) {
-                // Highly compressed video URL for web delivery
-                const videoUrl = `https://res.cloudinary.com/${cloudName}/video/upload/vc_auto,q_auto:eco,w_720/v${resource.version}/${resource.public_id}.${resource.format}`;
-                const video = document.createElement("video");
-                video.src = videoUrl;
-                video.controls = true;
-                video.muted = true;
-                video.loop = true;
-                video.playsInline = true;
-                video.preload = "none"; // ZERO bandwidth consumed until played!
-                card.appendChild(video);
-                videoGallery.appendChild(card);
-                videoCount++;
-              } else {
-                // Highly compressed responsive thumbnail: f_auto,q_auto:eco,w_600 (saves 95% bandwidth!)
-                const thumbUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:eco,w_600,c_limit/v${resource.version}/${resource.public_id}.${resource.format}`;
-                // High-res version loaded strictly on-demand if clicked in lightbox
-                const fullUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:good,w_1600,c_limit/v${resource.version}/${resource.public_id}.${resource.format}`;
-                
-                const img = document.createElement("img");
-                // Inline lightweight placeholder to prevent initial network request
-                img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%231a1a1a'/%3E%3C/svg%3E";
-                img.dataset.src = thumbUrl;
-                img.alt = "DR DINO Gym Moment";
-                img.loading = "lazy";
-                img.style.objectPosition = "top center";
-                img.addEventListener("click", () => openLightbox(fullUrl));
-                
-                card.appendChild(img);
-                photoGallery.appendChild(card);
-                imageObserver.observe(img);
-                photoCount++;
-              }
+              // Highly compressed responsive thumbnail: f_auto,q_auto:eco,w_600
+              const thumbUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:eco,w_600,c_limit/v${resource.version}/${resource.public_id}.${resource.format}`;
+              // High-res version loaded strictly on-demand if clicked in lightbox
+              const fullUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:good,w_1600,c_limit/v${resource.version}/${resource.public_id}.${resource.format}`;
+
+              const img = document.createElement("img");
+              img.src =
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3Crect width='4' height='3' fill='%231a1a1a'/%3E%3C/svg%3E";
+              img.dataset.src = thumbUrl;
+              img.alt = "DR DINO Gym Photo";
+              img.loading = "lazy";
+              img.style.objectPosition = "top center";
+              img.addEventListener("click", () => openLightbox(fullUrl));
+
+              card.appendChild(img);
+              photoGallery.appendChild(card);
+              imageObserver.observe(img);
+              photoCount++;
             });
 
             if (photoCount === 0) {
               photoGallery.innerHTML =
                 '<div class="gallery-empty"><div class="empty-icon">📷</div><p>No photos available yet.</p></div>';
             }
-            if (videoCount === 0) {
-              videoGallery.innerHTML =
-                '<div class="gallery-empty"><div class="empty-icon">🎥</div><p>No videos available yet.</p></div>';
-            }
           } catch (error) {
             console.error(error);
             loader.style.display = "none";
             photoGallery.innerHTML =
               '<div class="gallery-empty"><div class="empty-icon">⚠️</div><p>Unable to load photos at this time.</p></div>';
-            videoGallery.innerHTML =
-              '<div class="gallery-empty"><div class="empty-icon">⚠️</div><p>Unable to load videos at this time.</p></div>';
           }
         });
       </script>

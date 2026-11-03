@@ -1132,12 +1132,19 @@
                 </div>
               `;
             } else {
-              // f_auto,q_auto:eco for fast crisp preview with top center alignment
               const imgUrl = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto:eco,w_500/v${resource.version}/${resource.public_id}.${resource.format}`;
+              const classAssignButtons = activeFilterKey === 'classes' ? `
+                <div class="class-assign-row" style="margin-top: 6px; display: flex; gap: 4px; flex-wrap: wrap;">
+                  <button type="button" style="background:#25263a;color:#FFDD00;border:1px solid rgba(255,221,0,0.4);font-size:0.68rem;font-weight:700;padding:3px 6px;border-radius:4px;cursor:pointer;" onclick="assignClassImage(0, '${imgUrl}')">Set Card 1</button>
+                  <button type="button" style="background:#25263a;color:#FFDD00;border:1px solid rgba(255,221,0,0.4);font-size:0.68rem;font-weight:700;padding:3px 6px;border-radius:4px;cursor:pointer;" onclick="assignClassImage(1, '${imgUrl}')">Set Lux</button>
+                  <button type="button" style="background:#25263a;color:#FFDD00;border:1px solid rgba(255,221,0,0.4);font-size:0.68rem;font-weight:700;padding:3px 6px;border-radius:4px;cursor:pointer;" onclick="assignClassImage(2, '${imgUrl}')">Set Transform</button>
+                </div>
+              ` : '';
               card.innerHTML = `
                 <img src="${imgUrl}" alt="${currentSection.label} photo" loading="lazy">
                 <div class="card-overlay">
                   <span class="card-badge">📸 ${currentSection.label}</span>
+                  ${classAssignButtons}
                   <button class="delete-btn" onclick="confirmDelete('${resource.public_id}', '${resourceType}', this)">
                     🗑️ Delete
                   </button>
@@ -1172,6 +1179,12 @@
             if (countEl) countEl.textContent = count;
           } catch (_) {}
         }
+      }
+
+      function assignClassImage(idx, url) {
+        const names = ['At Home / Cardio', 'Lux', 'Transform'];
+        localStorage.setItem('drdino_cms_class_' + idx + '_img', url);
+        showToast(`✅ Set as ${names[idx]}!`);
       }
 
       // ===== DELETE FUNCTIONALITY =====

@@ -7,6 +7,9 @@ window.addEventListener("load", () => {
     if (preloader) {
       preloader.classList.add("hidden");
     }
+    if (typeof ScrollTrigger !== "undefined") {
+      ScrollTrigger.refresh();
+    }
   }, 1200);
   animateCounters();
 });
@@ -294,7 +297,90 @@ document.querySelectorAll(".infra-card, .achiever-card").forEach((card) => {
   });
 });
 
-// ===== FOUNDERS CAROUSEL =====
+// ===== CULT.FIT STYLE 3D SCROLL-DRIVEN ZOOM ANIMATION =====
+function initCultScrollAnimation() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    console.warn("GSAP / ScrollTrigger not loaded yet");
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // 1. Initialize Lenis Smooth Scrolling for buttery 60 FPS interpolation
+  let lenis = null;
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.2,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    // Smooth anchor navigation for all internal hash links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const hash = this.getAttribute("href");
+        if (hash && hash !== "#") {
+          const target = document.querySelector(hash);
+          if (target) {
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -70 });
+          }
+        }
+      });
+    });
+  }
+
+  // 2. Cult.fit 3D Scroll Zoom on all target sections
+  const zoomSections = document.querySelectorAll(".cult-scroll-zoom");
+  zoomSections.forEach((section) => {
+    const inner = section.querySelector(".cult-zoom-inner") || section;
+
+    // Set GPU acceleration hints
+    gsap.set(inner, {
+      transformStyle: "preserve-3d",
+      backfaceVisibility: "hidden",
+      force3D: true,
+    });
+
+    // Animate from scale(0.75), 3D translateZ(-120px), opacity 0.15 up to scale(1), translateZ(0), opacity 1
+    gsap.fromTo(
+      inner,
+      {
+        scale: 0.75,
+        z: -120, // 3D perspective depth translateZ
+        opacity: 0.15,
+        transformOrigin: "center center",
+      },
+      {
+        scale: 1,
+        z: 0,
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 95%",
+          end: "top 22%",
+          scrub: 1.2, // Smooth interpolation directly linked to scroll progress
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+  });
+}
+
+// ===== SECTION 2: 3D TRANSLUCENT VISIONARIES CAROUSEL =====
 function initFoundersCarousel() {
   const carousel = document.getElementById("foundersCarousel");
   const imageStage = document.getElementById("foundersImageStage");
@@ -327,13 +413,20 @@ function initFoundersCarousel() {
       quote:
         "Driving the strategic growth and excellence of DR DINO. His commitment to providing a world-class environment ensures that every athlete has the tools needed to surpass their own limits.",
     },
+    {
+      name: "Master Trainer",
+      role: "Elite Strength Specialist",
+      quote:
+        "Dedicated to sculpting champion physiques and pushing human limits through advanced biomechanics and championship programming.",
+    },
   ];
 
   const founders =
-    savedFoundersData && savedFoundersData.length
+    savedFoundersData && savedFoundersData.length >= 3
       ? savedFoundersData
       : defaultFounders;
 
+  const boxes = Array.from(imageStage.querySelectorAll(".founder-card-box"));
   const images = Array.from(
     imageStage.querySelectorAll(".founders-carousel-img"),
   );
@@ -341,105 +434,107 @@ function initFoundersCarousel() {
   // Load any saved founder images from CMS
   images.forEach((img, idx) => {
     const savedImg = localStorage.getItem("drdino_cms_founder_img_" + idx);
-    if (savedImg) img.src = savedImg;
+    if (savedImg) {
+      img.src = savedImg;
+      img.style.display = "block";
+      const ph = img.closest(".founder-card-glass")?.querySelector(".trancy-empty-placeholder");
+      if (ph) ph.style.display = "none";
+    }
   });
 
-  const total = founders.length;
-  let activeIndex = 0;
+  const total = boxes.length || 3;
+  let currentIndex = 0;
 
   window.foundersCarouselState = {
     founders,
-    getActiveIndex: () => activeIndex,
+    getActiveIndex: () => currentIndex,
     updateActiveFounder: (field, value) => {
-      if (founders[activeIndex]) {
-        founders[activeIndex][field] = value;
+      if (founders[currentIndex]) {
+        founders[currentIndex][field] = value;
         localStorage.setItem("drdino_founders_data", JSON.stringify(founders));
       }
     },
   };
   let autoplayTimer = null;
 
-  function calculateGap(width) {
-    const minWidth = 320;
-    const maxWidth = 1456;
-    const minGap = width <= 480 ? 36 : 60;
-    const maxGap = 86;
-    if (width <= minWidth) return minGap;
-    if (width >= maxWidth)
-      return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
-    return (
-      minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth))
-    );
-  }
+  function updateCarouselPositions() {
+    const currentBoxes = Array.from(imageStage.querySelectorAll(".founder-card-box"));
+    const isMobile = window.innerWidth <= 640;
+    const gapPercent = isMobile ? 38 : 46;
 
-  function updateLayoutVars() {
-    const width = imageStage.offsetWidth;
-    const gap = calculateGap(width);
-    imageStage.style.setProperty("--founders-gap", `${gap}px`);
-    imageStage.style.setProperty("--founders-stick-up", `${gap * 0.8}px`);
-  }
+    currentBoxes.forEach((box, index) => {
+      const offset = index - currentIndex;
+      let pos = (offset + total) % total;
+      if (pos > Math.floor(total / 2)) {
+        pos = pos - total;
+      }
 
-  function updateImages() {
-    images.forEach((img, index) => {
-      img.classList.remove("is-active", "is-left", "is-right", "is-hidden");
-      const isActive = index === activeIndex;
-      const isLeft = index === (activeIndex - 1 + total) % total;
-      const isRight = index === (activeIndex + 1) % total;
+      const isCenter = pos === 0;
+      const isAdjacent = Math.abs(pos) === 1;
 
-      if (isActive) img.classList.add("is-active");
-      else if (isLeft) {
-        img.classList.add("is-left");
-        img.style.setProperty("--founders-side", "-1");
-      } else if (isRight) {
-        img.classList.add("is-right");
-        img.style.setProperty("--founders-side", "1");
-      } else img.classList.add("is-hidden");
+      box.classList.toggle("is-center", isCenter);
+      box.classList.toggle("is-adjacent", isAdjacent);
+
+      const translateX = pos * gapPercent;
+      const scale = isCenter ? 1 : isAdjacent ? 0.85 : 0.7;
+      const rotateY = pos * -10;
+      const translateZ = isCenter ? 0 : -60;
+
+      box.style.transform = `translateX(${translateX}%) translateZ(${translateZ}px) scale(${scale}) rotateY(${rotateY}deg)`;
+      box.style.zIndex = isCenter ? 10 : isAdjacent ? 5 : 1;
+      box.style.opacity = isCenter ? 1 : isAdjacent ? 0.45 : 0;
+      box.style.filter = isCenter ? "blur(0px)" : "blur(4px)";
+      box.style.visibility = Math.abs(pos) > 1 ? "hidden" : "visible";
+      box.style.pointerEvents = isCenter || isAdjacent ? "auto" : "none";
     });
   }
 
   function renderQuote(text) {
-    quoteEl.innerHTML = "";
-    text.split(" ").forEach((word, i) => {
-      const span = document.createElement("span");
-      span.className = "quote-word";
-      span.style.animationDelay = `${0.025 * i}s`;
-      span.textContent = word;
-      quoteEl.appendChild(span);
-    });
+    if (!quoteEl) return;
+    quoteEl.textContent = text;
   }
 
   function updateText() {
-    const founder = founders[activeIndex];
+    const founder = founders[currentIndex] || founders[0];
+    if (!textPanel) return;
     textPanel.classList.add("is-changing");
 
     window.setTimeout(() => {
-      nameEl.textContent = founder.name;
-      roleEl.textContent = founder.role;
-      renderQuote(founder.quote);
+      if (nameEl) nameEl.textContent = founder.name;
+      if (roleEl) roleEl.textContent = founder.role;
+      if (quoteEl) renderQuote(founder.quote);
       textPanel.classList.remove("is-changing");
     }, 180);
   }
 
   function goTo(index, fromAutoplay = false) {
-    activeIndex = (index + total) % total;
-    updateLayoutVars();
-    updateImages();
+    currentIndex = (index + total) % total;
+    updateCarouselPositions();
     updateText();
     if (!fromAutoplay) resetAutoplay();
   }
 
   function next(fromAutoplay = false) {
-    goTo(activeIndex + 1, fromAutoplay);
+    goTo(currentIndex + 1, fromAutoplay);
   }
 
   function prev() {
-    goTo(activeIndex - 1);
+    goTo(currentIndex - 1);
   }
 
   function resetAutoplay() {
     clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(() => next(true), 5000);
+    autoplayTimer = setInterval(() => next(true), 4000);
   }
+
+  // Click on adjacent boxes to bring them to center
+  boxes.forEach((box, index) => {
+    box.addEventListener("click", () => {
+      if (currentIndex !== index) {
+        goTo(index);
+      }
+    });
+  });
 
   prevBtn?.addEventListener("click", () => prev());
   nextBtn?.addEventListener("click", () => next());
@@ -457,8 +552,7 @@ function initFoundersCarousel() {
   });
 
   window.addEventListener("resize", () => {
-    updateLayoutVars();
-    updateImages();
+    updateCarouselPositions();
   });
 
   // Touch swipe support for mobile
@@ -475,20 +569,70 @@ function initFoundersCarousel() {
     "touchend",
     (e) => {
       const diff = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(diff) < 40) return;
+      if (Math.abs(diff) < 35) return;
       if (diff > 0) prev();
       else next();
     },
     { passive: true },
   );
 
-  updateLayoutVars();
-  updateImages();
+  updateCarouselPositions();
   renderQuote(founders[0].quote);
   resetAutoplay();
 }
 
 initFoundersCarousel();
+initCultScrollAnimation();
+
+// ===== CULT.FIT CLASS CARD ACCORDION (MOBILE VIEW) =====
+function toggleCultCardAccordion(cardIndex) {
+  if (window.innerWidth > 768) return; // Desktop shows all cards full
+  const cards = document.querySelectorAll(".cult-class-card");
+  cards.forEach((card, idx) => {
+    if (idx === cardIndex) {
+      card.classList.toggle("active-mobile");
+    } else {
+      card.classList.remove("active-mobile");
+    }
+  });
+}
+
+function openClassScheduleModal(className) {
+  const contact = document.getElementById("contact");
+  if (contact) {
+    if (window.lenis) {
+      window.lenis.scrollTo(contact, { offset: -60, duration: 1.2 });
+    } else {
+      contact.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+}
+
+// Ensure class card videos autoplay smoothly on all devices
+function initCardVideosAutoplay() {
+  const cardVideos = document.querySelectorAll(".cult-class-card-video");
+  cardVideos.forEach((v) => {
+    v.muted = true;
+    v.playsInline = true;
+    const p = v.play();
+    if (p !== undefined) {
+      p.catch(() => {
+        const resume = () => {
+          v.play();
+          window.removeEventListener("touchstart", resume);
+          window.removeEventListener("scroll", resume);
+        };
+        window.addEventListener("touchstart", resume, { once: true });
+        window.addEventListener("scroll", resume, { once: true });
+      });
+    }
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCardVideosAutoplay);
+} else {
+  initCardVideosAutoplay();
+}
 
 // ===== REVIEWS STACKED CAROUSEL =====
 function initReviewsCarousel() {
@@ -720,6 +864,25 @@ async function loadDynamicCloudinarySections() {
 
   // 1. Founder Section Images
   const founderImages = document.querySelectorAll(".founders-carousel-img");
+  founderImages.forEach((img) => {
+    const ph = img.closest(".founder-card-glass")?.querySelector(".trancy-empty-placeholder");
+    function checkState() {
+      if (img.complete && img.naturalWidth > 0 && img.src && !img.src.endsWith("#") && img.getAttribute("src") !== "") {
+        img.style.display = "block";
+        if (ph) ph.style.display = "none";
+      } else {
+        img.style.display = "none";
+        if (ph) ph.style.display = "flex";
+      }
+    }
+    img.addEventListener("load", checkState);
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+      if (ph) ph.style.display = "flex";
+    });
+    checkState();
+  });
+
   if (founderImages.length > 0) {
     try {
       const res = await fetch(
@@ -735,6 +898,9 @@ async function loadDynamicCloudinarySections() {
             if (founderImages[idx]) {
               founderImages[idx].src =
                 `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:good,w_900,c_limit/v${item.version}/${item.public_id}.${item.format}`;
+              founderImages[idx].style.display = "block";
+              const ph = founderImages[idx].closest(".founder-card-glass")?.querySelector(".trancy-empty-placeholder");
+              if (ph) ph.style.display = "none";
             }
           });
         }
@@ -742,29 +908,44 @@ async function loadDynamicCloudinarySections() {
     } catch (_) {}
   }
 
-  // 2. Classes Section Images
-  const classImages = document.querySelectorAll(".classes-img-wrap img");
-  if (classImages.length > 0) {
-    try {
-      const res = await fetch(
-        `https://res.cloudinary.com/${cloudName}/image/list/gym_classes.json`,
-      );
-      if (res.ok) {
-        const data = await res.json();
-        if (data.resources && data.resources.length > 0) {
-          data.resources.sort(
-            (a, b) => new Date(b.created_at) - new Date(a.created_at),
-          );
-          data.resources.forEach((item, idx) => {
-            if (classImages[idx]) {
-              classImages[idx].src =
-                `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:good,w_800,c_limit/v${item.version}/${item.public_id}.${item.format}`;
-            }
-          });
-        }
+  // 2. Classes Section Images (Cult.fit 3-Card Format)
+  const classImages = [
+    document.getElementById("classCardImg0"),
+    document.getElementById("classCardImg1"),
+    document.getElementById("classCardImg2"),
+  ];
+
+  // First check localStorage for any direct CMS updates
+  classImages.forEach((img, idx) => {
+    if (!img) return;
+    const local = localStorage.getItem("drdino_cms_class_" + idx + "_img");
+    if (local) {
+      img.src = local;
+      img.style.objectPosition = "top center";
+    }
+  });
+
+  // Then fetch from Cloudinary
+  try {
+    const res = await fetch(
+      `https://res.cloudinary.com/${cloudName}/image/list/gym_classes.json`,
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (data.resources && data.resources.length > 0) {
+        data.resources.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at),
+        );
+        data.resources.forEach((item, idx) => {
+          if (classImages[idx] && !localStorage.getItem("drdino_cms_class_" + idx + "_img")) {
+            classImages[idx].src =
+              `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto:good,w_800,c_limit/v${item.version}/${item.public_id}.${item.format}`;
+            classImages[idx].style.objectPosition = "top center";
+          }
+        });
       }
-    } catch (_) {}
-  }
+    }
+  } catch (_) {}
 }
 document.addEventListener("DOMContentLoaded", loadDynamicCloudinarySections);
 
@@ -983,7 +1164,10 @@ async function handleInlineFilePicked(e) {
               ) || stage.querySelector(".founders-carousel-img");
             if (activeImg) {
               activeImg.src = secureUrl;
+              activeImg.style.display = "block";
               activeImg.style.objectPosition = "top center";
+              const ph = activeImg.closest(".founder-card-glass")?.querySelector(".trancy-empty-placeholder");
+              if (ph) ph.style.display = "none";
             }
           }
           localStorage.setItem(
@@ -991,22 +1175,17 @@ async function handleInlineFilePicked(e) {
             secureUrl,
           );
           showLiveToast(`✅ Founder photo updated live!`);
-        } else if (target === "class_cardio") {
-          const img = document.getElementById("classCardioImg");
+        } else if (target.startsWith("class_")) {
+          let classIdx = target.replace("class_", "");
+          if (classIdx === "cardio") classIdx = "0";
+          if (classIdx === "strength") classIdx = "1";
+          const img = document.getElementById("classCardImg" + classIdx) || document.getElementById(target === "class_cardio" ? "classCardioImg" : "classStrengthImg");
           if (img) {
             img.src = secureUrl;
             img.style.objectPosition = "top center";
           }
-          localStorage.setItem("drdino_cms_class_cardio_img", secureUrl);
-          showLiveToast("✅ Cardio class photo updated live!");
-        } else if (target === "class_strength") {
-          const img = document.getElementById("classStrengthImg");
-          if (img) {
-            img.src = secureUrl;
-            img.style.objectPosition = "top center";
-          }
-          localStorage.setItem("drdino_cms_class_strength_img", secureUrl);
-          showLiveToast("✅ Strength training photo updated live!");
+          localStorage.setItem("drdino_cms_class_" + classIdx + "_img", secureUrl);
+          showLiveToast(`✅ Class ${parseInt(classIdx) + 1} photo updated live!`);
         } else if (target === "gallery") {
           showLiveToast("✅ Uploaded to public gallery successfully!");
           // If on gallery page, refresh gallery items
