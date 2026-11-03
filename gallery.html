@@ -410,34 +410,14 @@
       <a href="index.html#about" onclick="closeMobile()">About</a>
       <a href="index.html#infrastructure" onclick="closeMobile()">Facilities</a>
       <a href="gallery.html" class="active" onclick="closeMobile()">Gallery</a>
+      <a href="plans.html" onclick="closeMobile()">Plans</a>
       <a href="index.html#reviews" onclick="closeMobile()">Reviews</a>
       <a href="index.html#instagram" onclick="closeMobile()">Instagram</a>
       <a href="index.html#contact" onclick="closeMobile()">Contact</a>
-      <!-- ===== SECRET SHIELD ENTRANCE (MOBILE) ===== -->
-      <div class="secret-shield mobile-shield" title="Authorized Personnel Only">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-      <!-- ===== DESKTOP LEFT MENU (ADMIN SHIELD ONLY) ===== -->
-      <div class="desktop-admin-menu-wrap" id="desktopAdminMenuWrap">
-        <button class="desktop-menu-btn" id="desktopMenuBtn" aria-label="Admin Navigation" title="Admin Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div class="desktop-shield-dropdown" id="desktopShieldDropdown">
-          <div class="secret-shield desktop-shield" title="Authorized Personnel Only">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
       <a href="index.html#home" class="logo">
         <img
           src="images/l1.png"
@@ -451,6 +431,7 @@
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#infrastructure">Facilities</a></li>
         <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="plans.html">Plans</a></li>
         <li><a href="index.html#reviews">Reviews</a></li>
         <li><a href="index.html#instagram">Instagram</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -481,14 +462,16 @@
         </h1>
       </div>
 
-      <!-- Passkey Modal for Shield -->
+      <!-- Passkey Modal for Admin Access -->
       <div id="passkey-modal" class="passkey-modal">
         <div class="passkey-container">
           <input
             type="password"
             id="passkey-input"
-            placeholder="Enter Access Code"
+            placeholder="ENTER PASSKEY"
+            maxlength="10"
           />
+          <button type="button" id="passkey-submit-btn" class="passkey-submit-btn">UNLOCK</button>
         </div>
       </div>
     </section>
@@ -857,61 +840,231 @@
       <a href="index.html" class="insta-back-btn"> ← Back to Home </a>
     </div>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="index.html#home" class="logo">
-            <span class="logo-text">DR <span class="gold">DINO</span></span>
-          </a>
-          <p>
-            A world-class royal fitness destination where champions are forged.
-            Premium equipment, expert coaches, and a legacy of transformation.
+    <!-- ===== FOOTER (SOLID BLACK LUXURY THEME) ===== -->
+    <footer class="footer" id="mainFooter">
+      <div class="footer-inner-container">
+        <!-- Brand Crest / Header -->
+        <div class="footer-brand-wrap">
+          <img
+            src="images/bg_img.png"
+            alt="DR DINO FITNESS &amp; GYM"
+            class="footer-logo-img"
+          />
+          <h3 class="footer-brand-title">DR DINO FITNESS &amp; GYM</h3>
+          <p class="footer-brand-subtitle">
+            CHENGALPATTU • ELITE STRENGTH &amp; CARDIO PERFORMANCE
           </p>
         </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#infrastructure">Facilities</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Programs</h4>
-          <ul>
-            <li><a href="#">Weight Training</a></li>
-            <li><a href="#">Bodybuilding</a></li>
-            <li><a href="#">Personal Training</a></li>
-            <li><a href="#">Group Classes</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <ul>
-            <li><a href="#">Membership Plans</a></li>
-            <li><a href="#">Free Trial</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 DR DINO FITNESS & GYM. All rights reserved.</span>
-        <div class="footer-socials">
+
+        <!-- 4-Action Quick Connect Bar -->
+        <div class="footer-action-bar">
+          <!-- 1. Call -->
           <a
-            href="https://www.instagram.com/shanmugammanishanmugam/"
-            target="_blank"
-            aria-label="Instagram"
-            >📷</a
+            href="tel:+917598917523"
+            class="footer-action-item action-call"
+            aria-label="Call DR DINO Gym"
           >
-          <a href="#" aria-label="YouTube">▶</a>
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Twitter">𝕏</a>
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+            </div>
+            <span class="footer-action-label">Call</span>
+          </a>
+
+          <!-- 2. Instagram -->
+          <a
+            href="https://www.instagram.com/dr_dino_fitness_gym/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-action-item action-insta"
+            aria-label="DR DINO Instagram"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+            <span class="footer-action-label">Instagram</span>
+          </a>
+
+          <!-- 3. Mail -->
+          <a
+            href="mailto:drdinofitness@gmail.com"
+            class="footer-action-item action-mail"
+            aria-label="Email DR DINO Gym"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <span class="footer-action-label">Mail</span>
+          </a>
+
+          <!-- 4. WhatsApp -->
+          <a
+            href="https://wa.me/917598917523?text=Hi%20DR%20DINO%20Fitness%2C%20I%20want%20to%20know%20more%20about%20gym%20membership!"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-action-item action-whatsapp"
+            aria-label="WhatsApp Chat"
+          >
+            <div class="footer-action-icon-box">
+              <svg
+                class="footer-action-svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                ></path>
+              </svg>
+            </div>
+            <span class="footer-action-label">WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="footer-bottom-credit">
+          <span>© 2026 DR DINO FITNESS &amp; GYM. All rights reserved.</span>
+          
+          >
         </div>
       </div>
     </footer>
+
+    <!-- Fixed Mobile Bottom Action Dock -->
+    <nav class="mobile-action-dock" aria-label="Quick Contact Actions">
+      <a href="tel:+917598917523" class="dock-item dock-call">
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </div>
+        <span class="dock-label">Call</span>
+      </a>
+
+      <a
+        href="https://www.instagram.com/dr_dino_fitness_gym/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dock-item dock-insta"
+      >
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path
+              d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+            ></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </div>
+        <span class="dock-label">Instagram</span>
+      </a>
+
+      <a href="mailto:drdinofitness@gmail.com" class="dock-item dock-mail">
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <span class="dock-label">Mail</span>
+      </a>
+
+      <a
+        href="https://wa.me/917598917523?text=Hi%20DR%20DINO%20Fitness%2C%20I%20want%20to%20know%20more%20about%20gym%20membership!"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dock-item dock-whatsapp"
+      >
+        <div class="dock-icon-wrap">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            ></path>
+          </svg>
+        </div>
+        <span class="dock-label">WhatsApp</span>
+      </a>
+    </nav>
 
     <script src="script.js"></script>
   </body>

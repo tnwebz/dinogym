@@ -104,59 +104,14 @@
       <a href="#about" onclick="closeMobile()">About</a>
       <a href="#infrastructure" onclick="closeMobile()">Facilities</a>
       <a href="gallery.html" onclick="closeMobile()">Gallery</a>
+      <a href="plans.html" onclick="closeMobile()">Plans</a>
       <a href="#reviews" onclick="closeMobile()">Reviews</a>
       <a href="#instagram" onclick="closeMobile()">Instagram</a>
       <a href="#contact" onclick="closeMobile()">Contact</a>
-      <!-- ===== SECRET SHIELD ENTRANCE (MOBILE) ===== -->
-      <div
-        class="secret-shield mobile-shield"
-        title="Authorized Personnel Only"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-      <!-- ===== DESKTOP LEFT MENU (ADMIN SHIELD ONLY) ===== -->
-      <div class="desktop-admin-menu-wrap" id="desktopAdminMenuWrap">
-        <button
-          class="desktop-menu-btn"
-          id="desktopMenuBtn"
-          aria-label="Admin Navigation"
-          title="Admin Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div class="desktop-shield-dropdown" id="desktopShieldDropdown">
-          <div
-            class="secret-shield desktop-shield"
-            title="Authorized Personnel Only"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
       <a href="#home" class="logo">
         <img
           src="images/l1.png"
@@ -170,6 +125,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#infrastructure">Facilities</a></li>
         <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="plans.html">Plans</a></li>
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#instagram">Instagram</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -182,7 +138,18 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="home">
-      <div class="hero-bg"></div>
+      <div class="hero-video-wrap">
+        <video
+          class="hero-bg-video"
+          id="heroBgVideo"
+          src="images/intro.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+      </div>
       <div class="hero-container">
         <div class="hero-content">
           <div
@@ -205,9 +172,7 @@
             class="hero-impact-subtitle"
             data-editable="true"
             data-cms-key="hero_subtitle"
-          >
-            Gym in Chengalpattu. Open 5:00 AM till 10:00 PM.
-          </p>
+          ></p>
           <div class="hero-buttons">
             <a href="#contact" class="btn-hero-yellow">
               Join Now
@@ -487,7 +452,6 @@
       <div class="cult-zoom-inner">
         <!-- Section Header -->
         <div class="classes-header-wrap">
-          <div class="section-tag classes-tag">★ Training Formats</div>
           <h2 class="classes-main-title">ELITE FITNESS PROGRAMS</h2>
           <p class="classes-main-subtitle">
             Engineered for pure transformation. Choose your training discipline
@@ -569,21 +533,17 @@
                 </li>
                 <li>
                   <span class="cult-check-icon">✓</span>
-                  <span>VO2 max &amp; endurance optimization</span>
-                </li>
-                <li>
-                  <span class="cult-check-icon">✓</span>
-                  <span>Real-time heart rate &amp; calorie burn tracking</span>
+                  <span>VO2 max &amp; metabolic endurance optimization</span>
                 </li>
               </ul>
 
-              <button
-                type="button"
+              <a
+                href="plans.html?program=cardio"
                 class="cult-know-more-btn"
-                onclick="openClassScheduleModal('Cardio')"
+                aria-label="Know more about Cardio program"
               >
                 KNOW MORE
-              </button>
+              </a>
             </div>
           </article>
 
@@ -667,19 +627,15 @@
                   <span class="cult-check-icon">✓</span>
                   <span>Certified championship form correction mentors</span>
                 </li>
-                <li>
-                  <span class="cult-check-icon">✓</span>
-                  <span>Progressive overload &amp; power biomechanics</span>
-                </li>
               </ul>
 
-              <button
-                type="button"
+              <a
+                href="plans.html?program=strength"
                 class="cult-know-more-btn"
-                onclick="openClassScheduleModal('Strength Training')"
+                aria-label="Know more about Strength Training"
               >
                 KNOW MORE
-              </button>
+              </a>
             </div>
           </article>
 
@@ -688,7 +644,7 @@
             <div class="cult-card-media-wrap">
               <video
                 id="classCardVideo2"
-                class="cult-class-card-video"
+                class="cult-class-card-video transform-video"
                 autoplay
                 muted
                 loop
@@ -747,29 +703,25 @@
               <ul class="cult-checklist">
                 <li>
                   <span class="cult-check-icon">✓</span>
-                  <span>Custom workout plans</span>
+                  <span>Custom workout plans &amp; progressive splits</span>
                 </li>
                 <li>
                   <span class="cult-check-icon">✓</span>
-                  <span>Daily habits + progress</span>
+                  <span>Daily habits + body composition tracking</span>
                 </li>
                 <li>
                   <span class="cult-check-icon">✓</span>
-                  <span>Personal coach who checks in daily</span>
-                </li>
-                <li>
-                  <span class="cult-check-icon">✓</span>
-                  <span>Tailored meal plans</span>
+                  <span>Personal coach check-ins &amp; tailored nutrition</span>
                 </li>
               </ul>
 
-              <button
-                type="button"
+              <a
+                href="plans.html?program=transform"
                 class="cult-know-more-btn"
-                onclick="openClassScheduleModal('Transform')"
+                aria-label="Know more about Transform program"
               >
                 KNOW MORE
-              </button>
+              </a>
             </div>
           </article>
         </div>
@@ -780,7 +732,6 @@
     <section class="home-instagram section cult-scroll-zoom" id="instagram">
       <div class="cult-zoom-inner">
         <div class="home-instagram-header reveal">
-          <div class="section-tag home-instagram-tag">📷 Instagram</div>
           <h2 class="section-title home-instagram-title">
             Follow Our Daily Grind
           </h2>
@@ -788,13 +739,6 @@
             Stay connected with DR DINO — workouts, wins, and behind-the-scenes
             from our community.
           </p>
-          <a
-            href="https://www.instagram.com/shanmugammanishanmugam/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="home-instagram-follow"
-            >Follow Us ↗</a
-          >
         </div>
         <div class="home-instagram-embed reveal">
           <script src="https://elfsightcdn.com/platform.js" async></script>
@@ -802,6 +746,8 @@
             class="elfsight-app-bf517fae-cc3d-4662-9ef0-95ce5deb973f"
             data-elfsight-app-lazy
           ></div>
+          <!-- Black Unclickable Screen to Cover Free Instagram Feed Widget -->
+          <div class="instagram-badge-blocker" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -810,7 +756,6 @@
     <section class="section reviews cult-scroll-zoom" id="reviews">
       <div class="cult-zoom-inner">
         <div class="reveal reviews-header">
-          <div class="section-tag reviews-tag">💬 Google Reviews</div>
           <br />
           <h2 class="seo-hidden">Join the DR DINO Family in Chengalpattu</h2>
 
@@ -1097,7 +1042,7 @@
         <!-- Brand Crest / Header -->
         <div class="footer-brand-wrap">
           <img
-            src="images/dino-logo.png"
+            src="images/bg_img.png"
             alt="DR DINO FITNESS &amp; GYM"
             class="footer-logo-img"
           />
@@ -1107,7 +1052,7 @@
           </p>
         </div>
 
-        <!-- 4-Action Quick Connect Bar (Solid Black Luxury Theme, matches user reference format) -->
+        <!-- 4-Action Quick Connect Bar -->
         <div class="footer-action-bar">
           <!-- 1. Call -->
           <a
@@ -1219,9 +1164,6 @@
 
         <div class="footer-bottom-credit">
           <span>© 2026 DR DINO FITNESS &amp; GYM. All rights reserved.</span>
-          <span class="footer-credit-sub"
-            >Built for Peak Human Performance</span
-          >
         </div>
       </div>
     </footer>
@@ -1320,6 +1262,7 @@
           placeholder="ENTER PASSKEY"
           maxlength="10"
         />
+        <button type="button" id="passkey-submit-btn" class="passkey-submit-btn">UNLOCK</button>
       </div>
     </div>
 

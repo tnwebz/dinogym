@@ -608,9 +608,11 @@ function openClassScheduleModal(className) {
   }
 }
 
-// Ensure class card videos autoplay smoothly on all devices
+// Ensure background & card videos autoplay smoothly on all devices
 function initCardVideosAutoplay() {
-  const cardVideos = document.querySelectorAll(".cult-class-card-video");
+  const cardVideos = document.querySelectorAll(
+    ".cult-class-card-video, .hero-bg-video, .infra-bg-video",
+  );
   cardVideos.forEach((v) => {
     v.muted = true;
     v.playsInline = true;
@@ -1077,6 +1079,14 @@ window.triggerInlineAdminUpload = function (targetType) {
   input.click();
 };
 
+window.triggerPlanCardUpload = function (planId) {
+  window.triggerInlineAdminUpload("plan_" + planId);
+};
+
+window.triggerScheduleUpload = function () {
+  window.triggerInlineAdminUpload("schedule");
+};
+
 // 3. Handle File Upload Directly to Cloudinary
 async function handleInlineFilePicked(e) {
   const files = Array.from(e.target.files || []);
@@ -1103,6 +1113,41 @@ async function handleInlineFilePicked(e) {
       const origKb = Math.round(comp.originalSize / 1024);
       const compKb = Math.round(comp.compressedSize / 1024);
       sizeMsg = `(${origKb}KB ➔ ${compKb}KB)`;
+
+      // Instant local preview on the page
+      try {
+        const localPreviewUrl = URL.createObjectURL(comp.blob);
+        if (target.startsWith("plan_")) {
+          const planId = target.replace("plan_", "");
+          const img = document.getElementById("planImg_" + planId);
+          if (img) {
+            img.src = localPreviewUrl;
+            img.style.objectPosition = "top center";
+          }
+        } else if (target === "schedule") {
+          const s = document.getElementById("scheduleImg");
+          const lb = document.getElementById("lightboxImg");
+          if (s) s.src = localPreviewUrl;
+          if (lb) lb.src = localPreviewUrl;
+        } else if (target.startsWith("class_")) {
+          let classIdx = target.replace("class_", "");
+          if (classIdx === "cardio") classIdx = "0";
+          if (classIdx === "strength") classIdx = "1";
+          const img =
+            document.getElementById("classCardImg" + classIdx) ||
+            document.getElementById(
+              target === "class_cardio"
+                ? "classCardioImg"
+                : "classStrengthImg",
+            );
+          if (img) {
+            img.src = localPreviewUrl;
+            img.style.objectPosition = "top center";
+          }
+        }
+      } catch (errPrev) {
+        console.warn("Local preview notice:", errPrev);
+      }
     } else {
       showLiveToast(`🎬 Preparing video ${file.name}...`, 6000);
     }
@@ -1119,6 +1164,12 @@ async function handleInlineFilePicked(e) {
     } else if (target.startsWith("class_")) {
       folder = "classes";
       tag = "gym_classes";
+    } else if (target.startsWith("plan_")) {
+      folder = "plans";
+      tag = "gym_plans";
+    } else if (target === "schedule") {
+      folder = "plans";
+      tag = "gym_schedule";
     }
 
     showLiveToast(`⬆️ Uploading to Cloudinary ${sizeMsg}...`, 8000);
@@ -1186,6 +1237,25 @@ async function handleInlineFilePicked(e) {
           }
           localStorage.setItem("drdino_cms_class_" + classIdx + "_img", secureUrl);
           showLiveToast(`✅ Class ${parseInt(classIdx) + 1} photo updated live!`);
+        } else if (target.startsWith("plan_")) {
+          const planId = target.replace("plan_", "");
+          const img = document.getElementById("planImg_" + planId);
+          if (img) {
+            img.src = secureUrl;
+            img.style.objectPosition = "top center";
+          }
+          localStorage.setItem("drdino_plan_img_" + planId, secureUrl);
+          if (typeof updateCustomCardImage === "function") {
+            updateCustomCardImage(planId, secureUrl);
+          }
+          showLiveToast(`✅ Program photo updated live!`);
+        } else if (target === "schedule") {
+          const s = document.getElementById("scheduleImg");
+          const lb = document.getElementById("lightboxImg");
+          if (s) s.src = secureUrl;
+          if (lb) lb.src = secureUrl;
+          localStorage.setItem("drdino_plan_schedule_img", secureUrl);
+          showLiveToast(`✅ Membership pricing schedule updated live!`);
         } else if (target === "gallery") {
           showLiveToast("✅ Uploaded to public gallery successfully!");
           // If on gallery page, refresh gallery items
@@ -1204,35 +1274,148 @@ async function handleInlineFilePicked(e) {
   }
 }
 
+// ===== UNIVERSAL CMS ENGINE: EVERY TEXT IN EVERY SECTION & PAGE IS EDITABLE =====
+function setupUniversalEditableContent() {
+  const path = window.location.pathname.toLowerCase();
+  let pagePrefix = "home";
+  if (path.includes("plans")) pagePrefix = "plans";
+  else if (path.includes("gallery")) pagePrefix = "gallery";
+  else if (path.includes("instagram")) pagePrefix = "insta";
+
+  function isEligibleTextElement(el) {
+    if (
+      el.closest("#liveAdminBar") ||
+      el.closest("#passkey-modal") ||
+      el.closest(".preloader") ||
+      el.closest(".logo") ||
+      el.closest(".hamburger") ||
+      el.closest(".admin-bar-btn") ||
+      el.closest(".card-delete-btn") ||
+      el.closest(".plan-card-upload-badge") ||
+      el.closest(".live-admin-upload-btn") ||
+      el.closest(".desktop-menu-btn") ||
+      el.closest(".close-menu") ||
+      el.closest(".navbar .nav-links") ||
+      el.closest(".nav-links") ||
+      el.closest(".mobile-menu") ||
+      el.closest(".mobile-action-dock") ||
+      el.closest(".footer-action-bar") ||
+      el.closest(".footer-bottom-credit") ||
+      el.closest(".footer-bottom") ||
+      el.closest(".footer-socials") ||
+      el.classList.contains("dock-label") ||
+      el.classList.contains("footer-action-label") ||
+      el.classList.contains("footer-credit-sub") ||
+      ["SCRIPT", "STYLE", "SVG", "PATH", "INPUT", "TEXTAREA", "SELECT", "VIDEO", "AUDIO", "CANVAS", "IFRAME"].includes(el.tagName)
+    ) {
+      return false;
+    }
+
+    // Must have direct or inner text
+    const text = el.textContent.trim();
+    if (!text) return false;
+
+    // Reject container elements that contain block children
+    const hasBlockChildren = Array.from(el.children).some((c) =>
+      ["DIV", "SECTION", "ARTICLE", "MAIN", "HEADER", "FOOTER", "NAV", "UL", "OL", "TABLE", "FORM"].includes(c.tagName)
+    );
+    if (hasBlockChildren) return false;
+
+    return true;
+  }
+
+  // 1. Primary text blocks: headings, paragraphs, list items, blockquotes, cites
+  const primaryBlocks = document.querySelectorAll(
+    "h1, h2, h3, h4, h5, h6, p, li, blockquote, cite"
+  );
+  primaryBlocks.forEach((el) => {
+    if (isEligibleTextElement(el)) {
+      el.setAttribute("data-editable", "true");
+    }
+  });
+
+  // 2. Standalone inline text elements: spans, badges, buttons, links, labels NOT inside an already-editable block
+  const inlineCandidates = document.querySelectorAll(
+    "span, a, button, strong, em, small, b, label, .badge, .tag, .plans-hero-tag, .plans-header-tag, .section-tag, .about-badge, .floating-badge, .stat-number, .stat-label, .metric-value, .metric-label, .footer-brand-title, .footer-brand-subtitle, .cult-know-more-btn, .schedule-action-btn span, .btn-primary, .btn-secondary, .hero-cta, .plans-quick-btn"
+  );
+  inlineCandidates.forEach((el) => {
+    if (
+      isEligibleTextElement(el) &&
+      !el.closest("h1, h2, h3, h4, h5, h6, p, li, blockquote")
+    ) {
+      // Don't tag elements that are pure image wrappers
+      if (el.querySelectorAll("img, video, svg").length > 0 && el.textContent.trim().length === 0) {
+        return;
+      }
+      el.setAttribute("data-editable", "true");
+    }
+  });
+
+  // Explicitly purge data-editable and contentEditable from excluded navigation & footer elements
+  const excludedElements = document.querySelectorAll(
+    ".navbar .nav-links, .navbar .nav-links *, .nav-links, .nav-links *, .mobile-menu, .mobile-menu *, .mobile-action-dock, .mobile-action-dock *, .footer-action-bar, .footer-action-bar *, .footer-bottom-credit, .footer-bottom-credit *, .footer-bottom, .footer-bottom *"
+  );
+  excludedElements.forEach((el) => {
+    el.removeAttribute("data-editable");
+    el.removeAttribute("data-cms-key");
+    el.contentEditable = "false";
+  });
+
+  // 3. Assign stable, deterministic keys to all data-editable elements
+  const allEditable = document.querySelectorAll('[data-editable="true"]');
+  allEditable.forEach((el, index) => {
+    if (!el.dataset.cmsKey) {
+      const section = el.closest("section, header, footer, nav, main, article, .hero, .footer") || document.body;
+      const secId = section.id || (section.className ? section.className.split(" ")[0] : "sec");
+      const tag = el.tagName.toLowerCase();
+      
+      const tagSiblings = Array.from(section.querySelectorAll(tag));
+      const idx = tagSiblings.indexOf(el);
+      const key = `${pagePrefix}_${secId}_${tag}_${idx >= 0 ? idx : index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      el.dataset.cmsKey = key;
+    }
+  });
+
+  return allEditable;
+}
+
 // 4. Activate Live Admin Mode
 function activateLiveAdminMode(isFirstActivation = false) {
   localStorage.setItem("drdino_admin_mode", "true");
   document.body.classList.add("admin-mode-active");
 
-  // Inject top admin bar if not already present
-  if (!document.getElementById("liveAdminBar")) {
-    const bar = document.createElement("div");
+  // Setup universal editable elements across entire page
+  const editableElements = setupUniversalEditableContent();
+
+  // Strip editable attributes from any navigation or dock element
+  document.querySelectorAll(
+    ".navbar .nav-links, .navbar .nav-links *, .nav-links, .nav-links *, .mobile-menu, .mobile-menu *, .mobile-action-dock, .mobile-action-dock *, .footer-action-bar, .footer-action-bar *, .footer-bottom-credit, .footer-bottom-credit *, .footer-bottom, .footer-bottom *"
+  ).forEach((el) => {
+    el.removeAttribute("data-editable");
+    el.contentEditable = "false";
+  });
+
+  // Inject top admin bar with ONLY "Save Changes" and "Exit Admin Access"
+  let bar = document.getElementById("liveAdminBar");
+  if (!bar) {
+    bar = document.createElement("div");
     bar.id = "liveAdminBar";
     bar.className = "live-admin-bar";
     bar.innerHTML = `
-      <div class="admin-bar-left">
-       
-        <span class="admin-bar-title"> LIVE CMS</span>
-        <span class="admin-bar-hint"> Click any outlined text to edit •  Tap buttons to upload</span>
-      </div>
-      <div class="admin-bar-right">
-        <button type="button" class="admin-bar-btn save-btn" onclick="saveAllLiveContent(true)"> Save Changes</button>
-        <button type="button" class="admin-bar-btn exit-btn" onclick="deactivateLiveAdminMode()"> Exit Admin</button>
+      <div class="admin-bar-center">
+        <button type="button" class="admin-bar-btn save-btn" onclick="saveAllLiveContent(true)">💾 Save Changes</button>
+        <button type="button" class="admin-bar-btn exit-btn" onclick="deactivateLiveAdminMode()">🚪 Exit Admin Access</button>
       </div>
     `;
     document.body.prepend(bar);
   }
 
   // Make all data-editable fields live editable
-  document.querySelectorAll('[data-editable="true"]').forEach((el) => {
+  editableElements.forEach((el) => {
     el.contentEditable = "true";
     el.setAttribute("spellcheck", "false");
 
+    // Auto-save on input
     el.oninput = () => {
       const key = el.dataset.cmsKey;
       if (key) {
@@ -1259,12 +1442,40 @@ function activateLiveAdminMode(isFirstActivation = false) {
         }
       }
     };
+
+    // Auto-save on blur
+    el.onblur = () => {
+      const key = el.dataset.cmsKey;
+      if (key) {
+        localStorage.setItem("drdino_cms_" + key, el.innerHTML);
+      }
+    };
+
+    // Commit single line on Enter key
+    if (["H1", "H2", "H3", "H4", "H5", "H6", "A", "BUTTON", "SPAN", "CITE"].includes(el.tagName)) {
+      el.onkeydown = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          el.blur();
+        }
+      };
+    }
+
+    // Intercept clicks on links/buttons so clicking focuses for typing instead of navigating
+    if (el.tagName === "A" || el.closest("a") || el.tagName === "BUTTON") {
+      el.onclick = (e) => {
+        if (document.body.classList.contains("admin-mode-active")) {
+          e.preventDefault();
+          el.focus();
+        }
+      };
+    }
   });
 
   if (isFirstActivation) {
     showLiveToast(
-      "🛡️ Admin Mode Active! You can now edit text and upload photos live.",
-      4500,
+      "🛡️ Admin Mode Active! Click any highlighted text to edit in-place.",
+      3500,
     );
   }
 }
@@ -1285,6 +1496,7 @@ function deactivateLiveAdminMode() {
 
 // 6. Save All Live Content
 window.saveAllLiveContent = function (showNotice = false) {
+  let count = 0;
   document.querySelectorAll('[data-editable="true"]').forEach((el) => {
     const key = el.dataset.cmsKey;
     if (key) {
@@ -1301,18 +1513,52 @@ window.saveAllLiveContent = function (showNotice = false) {
       ) {
         localStorage.setItem("drdino_cms_" + key, el.innerHTML);
       }
+      count++;
     }
   });
   if (showNotice) {
     showLiveToast(
-      "💾 All texts and photos are saved and live for all visitors!",
+      `💾 Saved! All ${count} texts are stored and live for all visitors!`,
       3000,
     );
   }
 };
 
-// 7. Load Saved CMS Content on Every Page Load (For ALL Visitors)
+// 7. Reset Live Content to Original HTML Defaults
+window.resetLiveContentToDefaults = function () {
+  if (
+    !confirm(
+      "Are you sure you want to reset all text changes on this page back to default original content?",
+    )
+  ) {
+    return;
+  }
+  const keysToRemove = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith("drdino_cms_")) {
+      keysToRemove.push(k);
+    }
+  }
+  keysToRemove.forEach((k) => localStorage.removeItem(k));
+  showLiveToast("🔄 Reset complete! Reloading page...", 2000);
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+};
+
+// 8. Load Saved CMS Content on Every Page Load (For ALL Visitors)
 function loadSavedCMSContent() {
+  // Clear obsolete class card keys from older versions so "Cardio" & "Strength Training" stay fresh
+  if (localStorage.getItem("drdino_cms_class_0_title") === "At Home") {
+    localStorage.removeItem("drdino_cms_class_0_title");
+    localStorage.removeItem("drdino_cms_class_0_sub");
+  }
+  if (localStorage.getItem("drdino_cms_class_1_title") === "Lux") {
+    localStorage.removeItem("drdino_cms_class_1_title");
+    localStorage.removeItem("drdino_cms_class_1_sub");
+  }
+
   // Hero Background
   const savedHeroBg = localStorage.getItem("drdino_cms_hero_bg");
   if (savedHeroBg) {
@@ -1323,12 +1569,15 @@ function loadSavedCMSContent() {
     }
   }
 
+  // Setup universal editable elements across entire page
+  const editableElements = setupUniversalEditableContent();
+
   // Restore Text Content
-  document.querySelectorAll('[data-editable="true"]').forEach((el) => {
+  editableElements.forEach((el) => {
     const key = el.dataset.cmsKey;
     if (key) {
       const saved = localStorage.getItem("drdino_cms_" + key);
-      if (saved) {
+      if (saved !== null && saved !== "") {
         if (key === "hero_badge") {
           const inner = el.querySelector(".editable-text-inner");
           if (inner) inner.innerHTML = saved;
@@ -1371,78 +1620,113 @@ function loadSavedCMSContent() {
 }
 document.addEventListener("DOMContentLoaded", loadSavedCMSContent);
 
-// ===== SECRET SHIELD ENTRANCE (ON-PAGE CMS UNLOCK) =====
-function initSecretShield() {
-  const shields = document.querySelectorAll(".secret-shield");
+// ===== TRIPLE-TAP "DR DINO" IN NAVBAR TO UNLOCK ADMIN ACCESS =====
+function initNavbarTripleTapAdmin() {
   const modal = document.getElementById("passkey-modal");
   const passkeyInput = document.getElementById("passkey-input");
-  const desktopMenuBtn = document.getElementById("desktopMenuBtn");
-  const desktopShieldDropdown = document.getElementById("desktopShieldDropdown");
+  if (!modal || !passkeyInput) return;
 
-  if (desktopMenuBtn && desktopShieldDropdown) {
-    desktopMenuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isActive = desktopShieldDropdown.classList.toggle("active");
-      desktopMenuBtn.classList.toggle("active", isActive);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!desktopShieldDropdown.contains(e.target) && !desktopMenuBtn.contains(e.target)) {
-        desktopShieldDropdown.classList.remove("active");
-        desktopMenuBtn.classList.remove("active");
-      }
-    });
+  function submitPasskey() {
+    if (passkeyInput.value.trim() === "111") {
+      modal.classList.remove("active");
+      passkeyInput.value = "";
+      activateLiveAdminMode(true);
+    } else {
+      alert("Access Denied");
+      modal.classList.remove("active");
+      passkeyInput.value = "";
+    }
   }
 
-  if (shields.length > 0 && modal && passkeyInput) {
-    let clickCount = 0;
-    let clickTimer = null;
+  passkeyInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      submitPasskey();
+    }
+  });
 
-    shields.forEach((shield) => {
-      shield.addEventListener("click", (e) => {
+  const submitBtn = document.getElementById("passkey-submit-btn");
+  if (submitBtn) {
+    submitBtn.addEventListener("click", submitPasskey);
+  }
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+      passkeyInput.value = "";
+    }
+  });
+
+  // Attach triple-tap listener to the navbar logo and logo text
+  const logos = document.querySelectorAll(".navbar .logo");
+  logos.forEach((logo) => {
+    let tapCount = 0;
+    let tapResetTimer = null;
+    let singleClickTimer = null;
+
+    logo.addEventListener("click", (e) => {
+      tapCount++;
+
+      if (tapCount === 1) {
+        // Start tap reset window (1.2 seconds for 3 taps)
+        if (tapResetTimer) clearTimeout(tapResetTimer);
+        tapResetTimer = setTimeout(() => {
+          tapCount = 0;
+        }, 1200);
+
+        // Single click: handle regular navigation after small delay
+        const href = logo.getAttribute("href");
+        if (href && href !== "javascript:void(0)" && href !== "#") {
+          e.preventDefault();
+          singleClickTimer = setTimeout(() => {
+            if (tapCount < 3) {
+              if (href.startsWith("#")) {
+                const target = document.querySelector(href);
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              } else {
+                window.location.href = href;
+              }
+            }
+          }, 350);
+        } else if (href === "#") {
+          e.preventDefault();
+          singleClickTimer = setTimeout(() => {
+            if (tapCount < 3) {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }, 350);
+        }
+      } else if (tapCount === 2) {
+        // Second tap received within threshold -> cancel single-click navigation!
+        e.preventDefault();
+        if (singleClickTimer) clearTimeout(singleClickTimer);
+      } else if (tapCount >= 3) {
+        // TRIPLE TAP COMPLETED!
+        e.preventDefault();
         e.stopPropagation();
-        clickCount++;
+        if (singleClickTimer) clearTimeout(singleClickTimer);
+        if (tapResetTimer) clearTimeout(tapResetTimer);
+        tapCount = 0;
 
-        if (clickCount === 1) {
-          clickTimer = setTimeout(() => {
-            clickCount = 0;
-          }, 1500);
+        if (document.body.classList.contains("admin-mode-active")) {
+          showLiveToast("⚡ Admin Mode is already active!");
+          return;
         }
 
-        if (clickCount === 3) {
-          clearTimeout(clickTimer);
-          clickCount = 0;
-          if (desktopShieldDropdown) desktopShieldDropdown.classList.remove("active");
-          if (desktopMenuBtn) desktopMenuBtn.classList.remove("active");
-          modal.classList.add("active");
+        // Open passkey modal
+        modal.classList.add("active");
+        setTimeout(() => {
+          passkeyInput.value = "";
           passkeyInput.focus();
-        }
-      });
-    });
-
-    passkeyInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        if (passkeyInput.value === "111") {
-          modal.classList.remove("active");
-          passkeyInput.value = "";
-          activateLiveAdminMode(true);
-        } else {
-          alert("Access Denied");
-          modal.classList.remove("active");
-          passkeyInput.value = "";
-        }
+        }, 60);
       }
     });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        passkeyInput.value = "";
-      }
-    });
-  }
+  });
 }
-document.addEventListener("DOMContentLoaded", initSecretShield);
+document.addEventListener("DOMContentLoaded", initNavbarTripleTapAdmin);
 
 // ===== PREVENT IMAGE DOWNLOADING & RIGHT-CLICK (DESKTOP & MOBILE) =====
 document.addEventListener("contextmenu", (e) => {
@@ -1462,3 +1746,82 @@ document.addEventListener("dragstart", (e) => {
     return false;
   }
 });
+
+// ===== HIDE INSTAGRAM WIDGET "FREE FEED WIDGET" BADGE WITH BLACK UNCLICKABLE SCREEN =====
+function suppressInstagramWidgetBadge() {
+  function scanAndHide() {
+    const badgeSelectors = [
+      '#instagram a[href*="elfsight.com"]',
+      '#instagram [class*="eapps-link"]',
+      '#instagram [class*="Badge"]',
+      '#instagram [class*="badge"]',
+      '.home-instagram-embed a[href*="elfsight.com"]',
+      '.home-instagram-embed [class*="eapps-link"]',
+      '.home-instagram-embed [class*="Badge"]',
+      '.elfsight-wrapper a[href*="elfsight.com"]',
+      '.elfsight-wrapper [class*="eapps-link"]',
+      '.elfsight-wrapper [class*="Badge"]',
+      'a[title*="Elfsight"]',
+      'a[aria-label*="Elfsight"]',
+    ];
+
+    document.querySelectorAll(badgeSelectors.join(",")).forEach((b) => {
+      b.style.setProperty("display", "none", "important");
+      b.style.setProperty("visibility", "hidden", "important");
+      b.style.setProperty("opacity", "0", "important");
+      b.style.setProperty("pointer-events", "none", "important");
+      b.style.setProperty("height", "0", "important");
+      b.style.setProperty("width", "0", "important");
+      b.style.setProperty("margin", "0", "important");
+      b.style.setProperty("padding", "0", "important");
+      b.style.setProperty("position", "absolute", "important");
+      b.style.setProperty("clip", "rect(0,0,0,0)", "important");
+      b.setAttribute("tabindex", "-1");
+      b.setAttribute("aria-hidden", "true");
+    });
+
+    // Inspect open shadow roots if attached
+    document.querySelectorAll('[class*="elfsight-app"]').forEach((app) => {
+      if (app.shadowRoot) {
+        app.shadowRoot
+          .querySelectorAll('a[href*="elfsight"], [class*="Badge"], [class*="link"]')
+          .forEach((b) => {
+            b.style.setProperty("display", "none", "important");
+            b.style.setProperty("visibility", "hidden", "important");
+            b.style.setProperty("opacity", "0", "important");
+            b.style.setProperty("pointer-events", "none", "important");
+          });
+      }
+    });
+
+    // Ensure black unclickable blocker screen exists in embed containers
+    document
+      .querySelectorAll(".home-instagram-embed, .elfsight-wrapper")
+      .forEach((container) => {
+        if (!container.querySelector(".instagram-badge-blocker")) {
+          const blocker = document.createElement("div");
+          blocker.className = "instagram-badge-blocker";
+          blocker.setAttribute("aria-hidden", "true");
+          container.appendChild(blocker);
+        }
+      });
+  }
+
+  scanAndHide();
+  const obs = new MutationObserver(scanAndHide);
+  const targetSec =
+    document.getElementById("instagram") ||
+    document.querySelector(".elfsight-wrapper");
+  if (targetSec) {
+    obs.observe(targetSec, { childList: true, subtree: true });
+  }
+
+  // Poll during initial async script load
+  let pollCount = 0;
+  const pollTimer = setInterval(() => {
+    scanAndHide();
+    pollCount++;
+    if (pollCount > 20) clearInterval(pollTimer);
+  }, 400);
+}
+document.addEventListener("DOMContentLoaded", suppressInstagramWidgetBadge);
